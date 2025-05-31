@@ -1,0 +1,3117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Путь Развития</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base styles */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000; /* Black background */
+            color: #e1d9ce; /* Light text color */
+            font-family: 'Orbitron', sans-serif; /* Futuristic font */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        /* Utility classes */
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Header styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8); /* Slightly transparent background */
+        }
+
+        .header-button {
+            background-color: #e1d9ce;
+            color: #000000; /* Black text */
+            border: none;
+            border-radius: 15px; /* Rounded corners */
+            padding: 0.75rem 1.25rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3); /* Beige/white glow */
+            text-shadow: none; /* No text shadow for these buttons */
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-button:hover {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 25px rgba(255, 255, 255, 0.5); /* Brighter beige/white glow on hover */
+            transform: translateY(-2px);
+        }
+
+        .header-button i {
+            margin-right: 0.5rem;
+        }
+
+        /* Music controls specific styles */
+        .music-controls-container {
+            position: relative;
+            margin-left: auto; /* Pushes it to the right */
+        }
+
+        #music-hamburger {
+            background-color: #e1d9ce;
+            color: #000000;
+            border: none;
+            border-radius: 50%; /* Circular button */
+            width: 45px;
+            height: 45px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3); /* Beige/white glow */
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #music-hamburger:hover {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 25px rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        #music-menu {
+            position: absolute;
+            top: 60px; /* Position below hamburger */
+            right: 0;
+            background-color: rgba(30, 30, 30, 0.95);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            display: none; /* Hidden by default */
+            flex-direction: column;
+            gap: 10px;
+            min-width: 150px;
+        }
+
+        #music-menu.show {
+            display: flex;
+        }
+
+        .music-menu-item {
+            background-color: #e1d9ce;
+            color: #000000; /* Black text */
+            border: none;
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Beige/white glow */
+            transition: all 0.2s ease;
+        }
+
+        .music-menu-item:hover {
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+            background-color: #f0e9e0;
+        }
+
+        /* Main content area */
+        .container {
+            flex-grow: 1;
+            padding: 2rem 1rem;
+            margin-top: 80px; /* Space for fixed header */
+            margin-bottom: 120px; /* Space for fixed footer */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Page specific styles */
+        .page {
+            width: 100%;
+            max-width: 900px; /* Max width for content */
+            padding: 1rem;
+            box-sizing: border-box;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Button grid for main page */
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* General button style */
+        .main-button, .sub-button {
+            background-color: #e1d9ce;
+            color: #000000; /* Black text */
+            border: none;
+            border-radius: 20px; /* More rounded */
+            padding: 1.5rem 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.3); /* Beige/white glow */
+            text-shadow: none; /* Remove white text shadow */
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            white-space: normal; /* Allow text to wrap */
+            word-wrap: break-word; /* Break long words */
+            line-height: 1.3;
+            min-height: 80px; /* Ensure minimum height for buttons */
+        }
+
+        .main-button:hover, .sub-button:hover {
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.5); /* Brighter beige/white glow on hover */
+            transform: translateY(-3px);
+        }
+
+        /* Subtle green neon for LLM buttons and related elements */
+        .llm-button {
+            background-color: #e1d9ce; /* Light background */
+            color: #000000; /* Black text for readability */
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 1.25rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(138, 255, 138, 0.5), 0 0 15px rgba(138, 255, 138, 0.3); /* Subtle green glow */
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .llm-button:hover {
+            box-shadow: 0 0 12px rgba(138, 255, 138, 0.7), 0 0 20px rgba(138, 255, 138, 0.5); /* Brighter green glow on hover */
+            transform: translateY(-2px);
+        }
+
+        #send-chat-button, #llm-modal-submit-button, #message-box-close-button {
+            background-color: #e1d9ce;
+            color: #000000;
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 1.25rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(138, 255, 138, 0.5); /* Subtle green glow */
+            transition: all 0.3s ease;
+        }
+
+        #send-chat-button:hover, #llm-modal-submit-button:hover, #message-box-close-button:hover {
+            box-shadow: 0 0 12px rgba(138, 255, 138, 0.7), 0 0 20px rgba(138, 255, 138, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Specific page content styling */
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #e1d9ce;
+            text-shadow: 0 0 10px #fff;
+        }
+
+        .page-section {
+            background-color: rgba(30, 30, 30, 0.9);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            text-align: left;
+            word-wrap: break-word;
+            line-height: 1.6;
+        }
+
+        .page-section h3 {
+            font-size: 1.8rem;
+            color: #e1d9ce;
+            text-shadow: 0 0 5px #fff;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .page-section p, .page-section ul {
+            font-size: 1.1rem;
+            color: #c0c0c0;
+        }
+
+        /* Changed link color to white-gray */
+        .page-section a {
+            color: #c0c0c0; /* White-gray text for links */
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .page-section a:hover {
+            color: #e1d9ce; /* Slightly lighter on hover */
+            text-decoration: underline;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Pomodoro Timer */
+        #pomodoro-timer {
+            font-size: 4rem;
+            color: #e1d9ce; /* Light text color */
+            text-shadow: 0 0 10px #fff; /* Subtle white glow */
+            margin-bottom: 1rem;
+        }
+
+        .timer-controls button {
+            background-color: #e1d9ce;
+            color: #000000;
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Beige/white glow */
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .timer-controls button:hover {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+            transform: translateY(-2px);
+        }
+
+        /* Footer buttons */
+        .footer {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8); /* Slightly transparent background */
+        }
+
+        .footer-button {
+            background-color: #e1d9ce;
+            color: #000000;
+            border: none;
+            border-radius: 15px;
+            padding: 0.75rem 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3); /* Beige/white glow */
+            text-shadow: none; /* No text shadow */
+            transition: all 0.3s ease;
+        }
+
+        .footer-button:hover {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 0 0 25px rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* AI Chat Container */
+        .chat-container {
+            position: fixed;
+            bottom: 80px; /* Adjusted to be above the footer */
+            left: 0;
+            right: 0;
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 1rem;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 999; /* Below header, above main content */
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            max-height: calc(30vh - 80px); /* Adjust max-height to account for new bottom offset */
+            transition: max-height 0.3s ease-in-out;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .chat-container.expanded {
+            max-height: calc(70vh - 80px); /* Adjust expanded height */
+        }
+
+        #chat-toggle-button {
+            background: none;
+            border: none;
+            color: #e1d9ce;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            transition: background-color 0.2s ease;
+        }
+
+        #chat-toggle-button:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        #chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            padding-right: 10px; /* For scrollbar */
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #c0c0c0;
+        }
+
+        .chat-message {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .chat-message.user {
+            background-color: #555;
+            align-self: flex-end;
+            margin-left: auto;
+            color: #fff;
+        }
+
+        .chat-message.ai {
+            background-color: #333;
+            align-self: flex-start;
+            margin-right: auto;
+            color: #e1d9ce;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        #chat-input {
+            flex-grow: 1;
+            padding: 0.75rem;
+            border: 1px solid #555;
+            border-radius: 10px;
+            background-color: #222;
+            color: #e1d9ce; /* Keep light text for dark background */
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+        }
+
+        #chat-input:focus {
+            outline: none;
+            border-color: rgba(138, 255, 138, 0.6); /* Subtle green glow on focus */
+            box-shadow: 0 0 8px rgba(138, 255, 138, 0.4); /* Subtle green glow on focus */
+        }
+
+        .attachment-button {
+            background-color: #e1d9ce;
+            color: #000000;
+            border: none;
+            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(138, 255, 138, 0.5); /* Subtle green glow */
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .attachment-button:hover {
+            box-shadow: 0 0 12px rgba(138, 255, 138, 0.7), 0 0 20px rgba(138, 255, 138, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Loading indicator for AI chat and modal */
+        .loading-indicator {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #8aff8a;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Generic LLM Modal Styles */
+        .llm-modal {
+            position: fixed;
+            z-index: 1001; /* Above everything else */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8); /* Dark overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .llm-modal-content {
+            background-color: rgba(30, 30, 30, 0.95);
+            margin: auto;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            animation: zoomIn 0.3s ease-out;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .llm-modal-close-button {
+            color: #e1d9ce;
+            font-size: 2rem;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .llm-modal-close-button:hover,
+        .llm-modal-close-button:focus {
+            color: rgba(138, 255, 138, 0.8); /* Subtle green on hover */
+        }
+
+        #llm-modal-title {
+            color: #e1d9ce;
+            text-shadow: 0 0 8px #fff;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .llm-modal-input-area {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #llm-modal-textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #555;
+            border-radius: 10px;
+            background-color: #222;
+            color: #e1d9ce; /* Keep light text for dark background */
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        #llm-modal-textarea:focus {
+            outline: none;
+            border-color: rgba(138, 255, 138, 0.6); /* Subtle green glow on focus */
+            box-shadow: 0 0 8px rgba(138, 255, 138, 0.4); /* Subtle green glow on focus */
+        }
+
+        #llm-modal-response-area {
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            padding: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #444;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        #llm-modal-response-text {
+            color: #c0c0c0;
+            white-space: pre-wrap; /* Preserve whitespace and line breaks */
+            word-wrap: break-word;
+        }
+
+        .image-preview-container {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .image-preview {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 10px;
+            object-fit: contain;
+            margin-bottom: 5px;
+        }
+
+        .clear-image-button {
+            background-color: #e1d9ce;
+            color: #000000;
+            border: none;
+            border-radius: 5px;
+            padding: 0.3rem 0.6rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            transition: all 0.2s ease;
+        }
+
+        .clear-image-button:hover {
+            background-color: #f0e9e0;
+        }
+
+        /* Custom Message Box Styles */
+        .message-box {
+            position: fixed;
+            z-index: 1002; /* Above LLM modal */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .message-box-content {
+            background-color: rgba(30, 30, 30, 0.95);
+            margin: auto;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            animation: zoomIn 0.3s ease-out;
+        }
+
+        #message-box-text {
+            font-size: 1.2rem;
+            color: #e1d9ce;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Image Upload Choice Modal */
+        #image-upload-choice-modal {
+            position: fixed;
+            z-index: 1003; /* Above message box */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #image-upload-choice-modal-content {
+            background-color: rgba(30, 30, 30, 0.95);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #image-upload-choice-modal-content button {
+            background-color: #e1d9ce;
+            color: #000000;
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 1.5rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        #image-upload-choice-modal-content button:hover {
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0.75rem;
+            }
+
+            .header-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            #music-hamburger {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 1rem 0.5rem;
+                margin-top: 70px;
+                margin-bottom: 100px;
+            }
+
+            .button-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 15px;
+            }
+
+            .main-button, .sub-button, .llm-button {
+                padding: 1rem 0.8rem;
+                font-size: 0.9rem;
+                min-height: 60px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .page-section {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .page-section h3 {
+                font-size: 1.5rem;
+            }
+
+            .page-section p, .page-section ul {
+                font-size: 1rem;
+            }
+
+            #pomodoro-timer {
+                font-size: 3rem;
+            }
+
+            .timer-controls button {
+                padding: 0.6rem 1.2rem;
+                font-size: 1rem;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 10px;
+                padding: 0.75rem;
+            }
+
+            .footer-button {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .chat-container {
+                padding: 0.75rem;
+            }
+
+            #chat-input {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            #send-chat-button {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .llm-modal-content, .message-box-content {
+                padding: 1.5rem;
+            }
+
+            #llm-modal-title {
+                font-size: 1.5rem;
+            }
+
+            #llm-modal-textarea {
+                font-size: 0.9rem;
+            }
+
+            #llm-modal-submit-button {
+                font-size: 0.9rem;
+            }
+
+            #llm-modal-response-text {
+                font-size: 0.9rem;
+            }
+
+            #message-box-text {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .button-grid {
+                grid-template-columns: 1fr; /* Single column on very small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button id="back-button" class="header-button hidden"><i class="fas fa-arrow-left"></i> Назад</button>
+        <div class="music-controls-container">
+            <button id="music-hamburger" class="header-button"><i class="fas fa-music"></i></button>
+            <div id="music-menu" class="music-menu-content">
+                <button id="music-play-pause" class="music-menu-item"><i class="fas fa-play"></i> / <i class="fas fa-pause"></i></button>
+                <button id="music-next" class="music-menu-item"><i class="fas fa-forward"></i> Далее</button>
+                <button id="music-prev" class="music-menu-item"><i class="fas fa-backward"></i> Назад</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="app-container">
+        </div>
+
+    <div class="footer">
+        <button id="support-chat-button" class="footer-button">Чат поддержки (Telegram)</button>
+        <button id="support-ai-button" class="footer-button">Поддержка AI</button>
+    </div>
+
+    <div id="chat-container" class="chat-container hidden">
+        <button id="chat-toggle-button">Спроси, что интересно <i class="fas fa-chevron-up"></i></button>
+        <div id="chat-messages"></div>
+        <div class="chat-input-area">
+            <button id="chat-attachment-button" class="attachment-button"><i class="fas fa-paperclip"></i></button>
+            <input type="text" id="chat-input" placeholder="Введите ваше сообщение...">
+            <button id="send-chat-button">Отправить</button>
+        </div>
+        <div id="chat-image-preview-container" class="image-preview-container hidden">
+            <img id="chat-image-preview" class="image-preview" src="" alt="Image Preview">
+            <button id="chat-clear-image-button" class="clear-image-button">Очистить</button>
+        </div>
+    </div>
+
+    <div id="llm-modal" class="llm-modal hidden">
+        <div class="llm-modal-content">
+            <span class="llm-modal-close-button">×</span>
+            <h3 id="llm-modal-title"></h3>
+            <div id="llm-modal-input-area" class="llm-modal-input-area">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <button id="llm-modal-attachment-button" class="attachment-button"><i class="fas fa-paperclip"></i></button>
+                    <textarea id="llm-modal-textarea" placeholder="Введите ваш запрос..." rows="4"></textarea>
+                </div>
+                <div id="llm-modal-image-preview-container" class="image-preview-container hidden">
+                    <img id="llm-modal-image-preview" class="image-preview" src="" alt="Image Preview">
+                    <button id="llm-modal-clear-image-button" class="clear-image-button">Очистить</button>
+                </div>
+                <button id="llm-modal-submit-button">Отправить</button>
+            </div>
+            <div id="llm-modal-response-area">
+                <p id="llm-modal-response-text"></p>
+                <div class="loading-indicator hidden" id="llm-modal-loading"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="message-box" class="message-box hidden">
+        <div class="message-box-content">
+            <p id="message-box-text"></p>
+            <button id="message-box-close-button">ОК</button>
+        </div>
+    </div>
+
+    <div id="image-upload-choice-modal" class="message-box hidden">
+        <div id="image-upload-choice-modal-content" class="message-box-content">
+            <p>Выберите источник изображения:</p>
+            <button id="take-photo-button"><i class="fas fa-camera"></i> Сделать фото</button>
+            <button id="choose-from-device-button"><i class="fas fa-upload"></i> Выбрать из устройства</button>
+            <button id="image-upload-choice-cancel-button" class="clear-image-button">Отмена</button>
+        </div>
+    </div>
+
+    <input type="file" accept="image/*" capture="camera" id="image-upload-camera" class="hidden">
+    <input type="file" accept="image/*" id="image-upload-file" class="hidden">
+
+
+    <audio id="background-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио элемент.
+    </audio>
+
+    <script>
+        // --- Global Variables ---
+        const appContainer = document.getElementById('app-container');
+        const backButton = document.getElementById('back-button');
+        const musicHamburger = document.getElementById('music-hamburger');
+        const musicMenu = document.getElementById('music-menu');
+        const musicPlayPauseButton = document.getElementById('music-play-pause');
+        const musicNextButton = document.getElementById('music-next');
+        const musicPrevButton = document.getElementById('music-prev');
+        const backgroundMusic = document.getElementById('background-music');
+        const supportChatButton = document.getElementById('support-chat-button');
+        const supportAiButton = document.getElementById('support-ai-button');
+        const chatContainer = document.getElementById('chat-container');
+        const chatToggleButton = document.getElementById('chat-toggle-button');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendChatButton = document.getElementById('send-chat-button');
+        const chatAttachmentButton = document.getElementById('chat-attachment-button');
+        const chatImagePreviewContainer = document.getElementById('chat-image-preview-container');
+        const chatImagePreview = document.getElementById('chat-image-preview');
+        const chatClearImageButton = document.getElementById('chat-clear-image-button');
+
+        const llmModal = document.getElementById('llm-modal');
+        const llmModalCloseButton = document.querySelector('.llm-modal-close-button');
+        const llmModalTitle = document.getElementById('llm-modal-title');
+        const llmModalInputArea = document.getElementById('llm-modal-input-area');
+        const llmModalTextarea = document.getElementById('llm-modal-textarea');
+        const llmModalSubmitButton = document.getElementById('llm-modal-submit-button');
+        const llmModalResponseArea = document.getElementById('llm-modal-response-area');
+        const llmModalResponseText = document.getElementById('llm-modal-response-text');
+        const llmModalLoading = document.getElementById('llm-modal-loading');
+        const llmModalAttachmentButton = document.getElementById('llm-modal-attachment-button');
+        const llmModalImagePreviewContainer = document.getElementById('llm-modal-image-preview-container');
+        const llmModalImagePreview = document.getElementById('llm-modal-image-preview');
+        const llmModalClearImageButton = document.getElementById('llm-modal-clear-image-button');
+
+
+        const messageBox = document.getElementById('message-box');
+        const messageBoxText = document.getElementById('message-box-text');
+        const messageBoxCloseButton = document.getElementById('message-box-close-button');
+
+        const imageUploadChoiceModal = document.getElementById('image-upload-choice-modal');
+        const takePhotoButton = document.getElementById('take-photo-button');
+        const chooseFromDeviceButton = document.getElementById('choose-from-device-button');
+        const imageUploadChoiceCancelButton = document.getElementById('image-upload-choice-cancel-button');
+        const imageUploadCamera = document.getElementById('image-upload-camera');
+        const imageUploadFile = document.getElementById('image-upload-file');
+
+        let historyStack = []; // To manage navigation history
+        let isMusicPlaying = false;
+        let musicTracks = [
+            "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+            "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+            "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+        ];
+        let currentTrackIndex = 0;
+        let pomodoroTimerInterval;
+        let pomodoroTimeLeft = 25 * 60; // 25 minutes in seconds
+        let isPomodoroRunning = false;
+        const pomodoroSound = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3'); // Placeholder sound
+
+        let currentImageBase64 = null; // Stores the Base64 image data for sending to AI
+        let currentImageTarget = null; // Stores which image preview to update (chat or modal)
+
+        // --- Utility Functions ---
+
+        /**
+         * Displays a custom message box.
+         * @param {string} message - The message to display.
+         */
+        function showMessageBox(message) {
+            messageBoxText.textContent = message;
+            messageBox.classList.remove('hidden');
+        }
+
+        /**
+         * Hides the custom message box.
+         */
+        function hideMessageBox() {
+            messageBox.classList.add('hidden');
+        }
+
+        /**
+         * Displays the LLM interaction modal.
+         * @param {string} title - The title for the modal.
+         * @param {boolean} showInput - Whether to show the input textarea and submit button.
+         * @param {string} placeholder - Placeholder text for the textarea.
+         * @param {string} initialPrompt - Initial prompt to send to AI if no input is needed.
+         * @param {string} aiPersona - Optional: defines the AI persona for the prompt (e.g., "Как финансовый консультант").
+         */
+        function showLlmModal(title, showInput, placeholder = '', initialPrompt = '', aiPersona = '') {
+            llmModalTitle.textContent = title;
+            llmModalTextarea.value = ''; // Clear previous input
+            llmModalResponseText.innerHTML = ''; // Clear previous response, use innerHTML for markdown
+            llmModalSubmitButton.dataset.aiPersona = aiPersona; // Store persona for submit handler
+            currentImageBase64 = null; // Clear any previous image
+            llmModalImagePreviewContainer.classList.add('hidden'); // Hide image preview
+
+            if (showInput) {
+                llmModalInputArea.classList.remove('hidden');
+                llmModalTextarea.placeholder = placeholder;
+                llmModalResponseArea.classList.add('hidden'); // Hide response area initially
+            } else {
+                llmModalInputArea.classList.add('hidden');
+                llmModalResponseArea.classList.remove('hidden'); // Show response area for direct display
+                // If no input is needed, send the initial prompt directly
+                if (initialPrompt) {
+                    const fullPrompt = aiPersona ? `${aiPersona}, ${initialPrompt}` : initialPrompt;
+                    callGeminiAPI(fullPrompt, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                }
+            }
+            llmModalLoading.classList.add('hidden'); // Hide loading indicator
+            llmModal.classList.remove('hidden');
+        }
+
+        /**
+         * Hides the LLM interaction modal.
+         */
+        function hideLlmModal() {
+            llmModal.classList.add('hidden');
+            currentImageBase64 = null; // Clear image when modal closes
+            llmModalImagePreviewContainer.classList.add('hidden');
+            llmModalImagePreview.src = '';
+        }
+
+        /**
+         * Adds a message to the chat display.
+         * @param {string} message - The message text.
+         * @param {string} sender - 'user' or 'ai'.
+         * @param {string} [imageData] - Optional Base64 image data to display.
+         */
+        function addChatMessage(message, sender, imageData = null) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message', sender);
+
+            if (imageData) {
+                const img = document.createElement('img');
+                img.src = imageData;
+                img.classList.add('chat-message-image');
+                img.style.maxWidth = '100%';
+                img.style.maxHeight = '150px';
+                img.style.borderRadius = '10px';
+                img.style.marginBottom = '5px';
+                messageDiv.appendChild(img);
+            }
+
+            const textNode = document.createElement('p');
+            textNode.textContent = message;
+            messageDiv.appendChild(textNode);
+
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+        }
+
+        /**
+         * Sends a message to the AI and displays the response.
+         * Uses the Gemini API.
+         * @param {string} prompt - The user's prompt.
+         * @param {HTMLElement} responseTarget - The element to display the AI response in.
+         * @param {HTMLElement} loadingTarget - The loading indicator element.
+         * @param {function} [callback] - Optional callback function to run after response.
+         * @param {string} [imageData] - Optional Base64 image data.
+         */
+        async function callGeminiAPI(prompt, responseTarget, loadingTarget, callback = null, imageData = null) {
+            loadingTarget.classList.remove('hidden');
+            // If responseTarget is a p tag, clear its text. If it's a div, clear its children.
+            if (responseTarget.tagName === 'P') {
+                responseTarget.textContent = '';
+            } else {
+                responseTarget.innerHTML = ''; // Clear content for chat messages
+            }
+
+            try {
+                let chatHistory = [];
+                const parts = [{ text: prompt }];
+                if (imageData) {
+                    parts.push({
+                        inlineData: {
+                            mimeType: "image/png", // Assuming PNG, adjust if needed
+                            data: imageData.split(',')[1] // Remove "data:image/png;base64," prefix
+                        }
+                    });
+                }
+                chatHistory.push({ role: "user", parts: parts });
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // Canvas will provide this at runtime
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                loadingTarget.classList.add('hidden'); // Remove loading indicator
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    if (responseTarget.tagName === 'P') {
+                        // For LLM modal response, allow HTML/Markdown rendering
+                        responseTarget.innerHTML = marked.parse(text); // Use marked.js for Markdown
+                    } else { // For chat messages
+                        addChatMessage(text, 'ai');
+                    }
+                    if (callback) callback(text);
+                } else {
+                    if (responseTarget.tagName === 'P') {
+                        responseTarget.textContent = "Извините, не удалось получить ответ от AI.";
+                    } else { // For chat messages
+                        addChatMessage("Извините, не удалось получить ответ от AI.", 'ai');
+                    }
+                    console.error("Unexpected AI response structure:", result);
+                }
+            } catch (error) {
+                loadingTarget.classList.add('hidden'); // Remove loading indicator
+                if (responseTarget.tagName === 'P') {
+                    responseTarget.textContent = "Произошла ошибка при общении с AI. Попробуйте снова.";
+                } else { // For chat messages
+                    addChatMessage("Произошла ошибка при общении с AI. Попробуйте снова.", 'ai');
+                }
+                console.error("Error communicating with AI:", error);
+            }
+        }
+
+        /**
+         * Sends a message to the main AI chat and displays the response.
+         */
+        async function sendAIChatMessage() {
+            const prompt = chatInput.value.trim();
+            if (!prompt && !currentImageBase64) return; // Don't send empty messages
+
+            addChatMessage(prompt, 'user', currentImageBase64); // Display user message with image
+            chatInput.value = '';
+            chatImagePreviewContainer.classList.add('hidden');
+            chatImagePreview.src = '';
+            currentImageBase64 = null; // Clear image after sending
+
+            const loadingIndicator = document.createElement('span');
+            loadingIndicator.classList.add('loading-indicator');
+            chatMessages.appendChild(loadingIndicator);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            await callGeminiAPI(prompt, chatMessages, loadingIndicator, null, currentImageBase64);
+        }
+
+        /**
+         * Updates the visibility of the back button.
+         */
+        function updateNavigationButtons() {
+            if (historyStack.length > 1) {
+                backButton.classList.remove('hidden');
+            } else {
+                backButton.classList.add('hidden');
+            }
+        }
+
+        /**
+         * Navigates to a specific page by ID.
+         * @param {string} pageId - The ID of the page to show.
+         * @param {boolean} pushToHistory - Whether to add the page to history (true for forward navigation).
+         */
+        function showPage(pageId, pushToHistory = true) {
+            // Hide all pages first
+            const pages = appContainer.querySelectorAll('.page');
+            pages.forEach(page => page.remove()); // Remove existing pages
+
+            // Add to history if not going back
+            if (pushToHistory) {
+                historyStack.push(pageId);
+            } else {
+                // If popping from history, ensure the current page is removed before adding the new one
+                if (historyStack[historyStack.length - 1] !== pageId) {
+                    historyStack.pop(); // Remove current page from history
+                }
+            }
+            updateNavigationButtons();
+
+            // Render the requested page
+            let pageContent = '';
+            let pageTitle = '';
+
+            // Define content for new skill sub-pages
+            const skillContents = {
+                // Financial and Intellectual Skills
+                'skills-finance-10k': {
+                    title: 'Накопить 10,000',
+                    info: '<p>Накопление 10,000 рублей — отличная первая цель. Начните с анализа своих доходов и расходов, чтобы понять, сколько вы можете откладывать ежемесячно. Постарайтесь сократить необязательные траты и рассмотрите возможность дополнительного заработка.</p>',
+                    aiPrompt: 'Как финансовый консультант, дай пошаговый план, как накопить 10,000 рублей. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-finance-20k': {
+                    title: 'Накопить 20,000',
+                    info: '<p>Для накопления 20,000 рублей важно продолжать отслеживать бюджет и искать способы увеличения сбережений. Возможно, стоит рассмотреть более агрессивные методы сокращения расходов или увеличить доход.</p>',
+                    aiPrompt: 'Как финансовый консультант, дай советы по накоплению 20,000 рублей. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-finance-40k': {
+                    title: 'Накопить 40,000',
+                    info: '<p>Достижение 40,000 рублей требует дисциплины. Пересмотрите свои финансовые привычки, возможно, найдите новые источники дохода или оптимизируйте крупные расходы. Подумайте о краткосрочных инвестициях, если это безопасно.</p>',
+                    aiPrompt: 'Как финансовый консультант, дай стратегию для накопления 40,000 рублей. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-finance-60k': {
+                    title: 'Накопить 60,000',
+                    info: '<p>Накопление 60,000 рублей — значительная цель. Это может потребовать более серьезного подхода к бюджету и поиску возможностей для роста капитала. Рассмотрите создание автоматических переводов на сберегательный счет.</p>',
+                    aiPrompt: 'Как финансовый консультант, дай подробный план по накоплению 60,000 рублей. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-finance-80k': {
+                    title: 'Накопить 80,000',
+                    info: '<p>Для 80,000 рублей необходимо не только экономить, но и думать о приумножении. Изучите основы инвестирования, если еще не сделали этого. Продолжайте строго контролировать расходы и искать новые источники дохода.</p>',
+                    aiPrompt: 'Как финансовый консультант, дай рекомендации по накоплению 80,000 рублей. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-finance-100k': {
+                    title: 'Накопить 100,000',
+                    info: '<p>Достижение 100,000 рублей — это серьезное финансовое достижение. На этом этапе важно не только продолжать сберегать, но и активно управлять своими финансами, возможно, с помощью профессионалов или более сложных инвестиционных стратегий.</p>',
+                    aiPrompt: 'Как финансовый консультант, дай комплексную стратегию по накоплению 100,000 рублей. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-books-1': {
+                    title: 'Прочесть 1 книгу',
+                    info: '<p>Начните с выбора книги, которая вам действительно интересна. Установите реалистичную цель по количеству страниц в день и придерживайтесь её. Чтение по 15-30 минут в день уже даст результат.</p>',
+                    aiPrompt: 'Как эксперт по чтению, дай советы, как прочесть 1 книгу, если нет привычки читать. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-books-2': {
+                    title: 'Прочесть 2 книги',
+                    info: '<p>Для двух книг в месяц увеличьте время чтения или количество страниц. Попробуйте читать в разное время дня, например, утром и вечером. Выбирайте книги, которые легко читаются и увлекают.</p>',
+                    aiPrompt: 'Как эксперт по чтению, дай план, как прочесть 2 книги за месяц. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-books-4': {
+                    title: 'Прочесть 4 книги',
+                    info: '<p>Четыре книги в месяц — это уже серьезный темп. Используйте метод Pomodoro для чтения, делайте заметки, чтобы лучше усваивать информацию. Попробуйте аудиокниги для моментов, когда нет возможности читать.</p>',
+                    aiPrompt: 'Как эксперт по чтению, дай эффективные методы для чтения 4 книг в месяц. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-books-8': {
+                    title: 'Прочесть 8 книг',
+                    info: '<p>Восемь книг в месяц — это высокий уровень. Возможно, стоит сосредоточиться на более коротких книгах или использовать техники скорочтения. Важно не только количество, но и качество усвоения информации.</p>',
+                    aiPrompt: 'Как эксперт по чтению, дай продвинутые стратегии для чтения 8 книг в месяц. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-books-10': {
+                    title: 'Прочесть 10 книг',
+                    info: '<p>Для десяти книг в месяц необходимо максимально оптимизировать процесс чтения. Используйте все доступные ресурсы: электронные книги, аудиокниги, короткие перерывы для чтения. Погрузитесь в процесс.</p>',
+                    aiPrompt: 'Как эксперт по чтению, дай советы по чтению 10 книг в месяц. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-books-12': {
+                    title: 'Прочесть 12 книг',
+                    info: '<p>Двенадцать книг в месяц — это по две книги в неделю. Это требует серьезной отдачи и оптимизации времени. Возможно, стоит рассмотреть чтение нескольких книг одновременно или фокусироваться на конкретных жанрах.</p>',
+                    aiPrompt: 'Как эксперт по чтению, дай советы по чтению 12 книг в месяц. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-english-a1': {
+                    title: 'Английский A1',
+                    info: '<p>Уровень A1 — это основы. Начните с изучения алфавита, простых фраз, базовой грамматики и словарного запаса. Используйте приложения для изучения языков и смотрите детские мультфильмы на английском.</p>',
+                    aiPrompt: 'Как преподаватель английского, дай план для достижения уровня A1. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-english-a2': {
+                    title: 'Английский A2',
+                    info: '<p>На уровне A2 вы уже можете понимать простые предложения и участвовать в базовых диалогах. Сосредоточьтесь на расширении словарного запаса, улучшении произношения и понимании простых текстов.</p>',
+                    aiPrompt: 'Как преподаватель английского, дай план для достижения уровня A2. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-english-b1': {
+                    title: 'Английский B1',
+                    info: '<p>B1 — это средний уровень. Вы можете общаться на повседневные темы, понимать основную идею сложных текстов. Практикуйте разговорную речь, читайте адаптированные книги и смотрите сериалы с субтитрами.</p>',
+                    aiPrompt: 'Как преподаватель английского, дай план для достижения уровня B1. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-english-b2': {
+                    title: 'Английский B2',
+                    info: '<p>B2 — это уверенный средний уровень. Вы можете свободно общаться, понимать сложные тексты и участвовать в дискуссиях. Сосредоточьтесь на нюансах грамматики, идиомах и расширении академического словарного запаса.</p>',
+                    aiPrompt: 'Как преподаватель английского, дай план для достижения уровня B2. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-english-c1': {
+                    title: 'Английский C1',
+                    info: '<p>C1 — продвинутый уровень. Вы можете свободно и спонтанно выражать свои мысли, понимать сложные тексты. Практикуйте академическое письмо, участвуйте в дебатах и читайте оригинальную литературу.</p>',
+                    aiPrompt: 'Как преподаватель английского, дай план для достижения уровня C1. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-english-c2': {
+                    title: 'Английский C2',
+                    info: '<p>C2 — уровень владения в совершенстве, близкий к носителю языка. Вы можете понимать практически всё, что слышите и читаете. Поддерживайте свой уровень, постоянно практикуясь и погружаясь в языковую среду.</p>',
+                    aiPrompt: 'Как преподаватель английского, дай план для достижения уровня C2. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-sign-language': {
+                    title: 'Выучить язык жестов',
+                    info: '<p>Изучение языка жестов открывает новые возможности для общения. Начните с основ: алфавита, базовых слов и фраз. Используйте онлайн-ресурсы, видеоуроки и, по возможности, общайтесь с носителями языка.</p>',
+                    aiPrompt: 'Как эксперт по языку жестов, дай пошаговый план, как выучить язык жестов. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                // Physical and Mental Development Skills
+                'skills-sport-1day': {
+                    title: 'Спорт дома — день 1',
+                    info: '<p>Начните с легкой разминки, затем выполните базовые упражнения: приседания, отжимания от пола (или от стены), планка. Завершите растяжкой. Главное — начать и сделать первый шаг!</p>',
+                    aiPrompt: 'Как фитнес-тренер, дай план тренировки дома на 1 день для начинающих. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-sport-5day': {
+                    title: 'Спорт дома — день 5',
+                    info: '<p>К пятому дню вы уже освоили основы. Увеличьте количество повторений или подходов, добавьте новые упражнения, например, выпады или скручивания. Помните о правильной технике.</p>',
+                    aiPrompt: 'Как фитнес-тренер, дай план тренировки дома на 5 дней для новичков. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-sport-10day': {
+                    title: 'Спорт дома — день 10',
+                    info: '<p>На десятый день можно усложнить тренировку: добавьте интервальные упражнения или используйте легкие утяжелители (бутылки с водой). Следите за питанием и режимом сна.</p>',
+                    aiPrompt: 'Как фитнес-тренер, дай план тренировки дома на 10 дней для среднего уровня. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-sport-15day': {
+                    title: 'Спорт дома — день 15',
+                    info: '<p>К пятнадцатому дню вы уже чувствуете себя сильнее. Попробуйте более сложные вариации упражнений или увеличьте длительность тренировки. Разнообразьте программу, чтобы не потерять мотивацию.</p>',
+                    aiPrompt: 'Как фитнес-тренер, дай план тренировки дома на 15 дней для продвинутых. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-sport-20day': {
+                    title: 'Спорт дома — день 20',
+                    info: '<p>На двадцатый день вы уже сформировали привычку. Возможно, стоит попробовать тренировки с собственным весом, такие как берпи или прыжки. Уделите внимание восстановлению и правильному питанию.</p>',
+                    aiPrompt: 'Как фитнес-тренер, дай план тренировки дома на 20 дней. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-sport-30day': {
+                    title: 'Спорт дома — день 30',
+                    info: '<p>Месяц регулярных тренировок — это отличный результат! Теперь вы можете ставить более амбициозные цели, например, освоить новые элементы или улучшить выносливость. Продолжайте слушать свое тело.</p>',
+                    aiPrompt: 'Как фитнес-тренер, дай план тренировки дома на 30 дней. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-meditation-1day': {
+                    title: 'Медитация — день 1',
+                    info: '<p>Начните с 5 минут. Сядьте удобно, закройте глаза и сосредоточьтесь на своем дыхании. Когда мысли отвлекают, мягко возвращайте внимание к дыханию. Не судите себя, просто наблюдайте.</p>',
+                    aiPrompt: 'Как специалист по медитации, дай инструкцию для медитации на 1 день для начинающих. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-meditation-5day': {
+                    title: 'Медитация — день 5',
+                    info: '<p>К пятому дню вы уже привыкаете к процессу. Увеличьте время до 10-15 минут. Попробуйте сканирование тела, обращая внимание на ощущения в разных частях тела без оценки.</p>',
+                    aiPrompt: 'Как специалист по медитации, дай план медитации на 5 дней. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-meditation-10day': {
+                    title: 'Медитация — день 10',
+                    info: '<p>На десятый день вы можете заметить, как медитация влияет на ваше состояние. Попробуйте медитацию осознанности, фокусируясь на звуках, запахах или ощущениях вокруг вас.</p>',
+                    aiPrompt: 'Как специалист по медитации, дай план медитации на 10 дней. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-meditation-15day': {
+                    title: 'Медитация — день 15',
+                    info: '<p>К пятнадцатому дню медитация становится частью вашей рутины. Экспериментируйте с разными техниками или используйте управляемые медитации. Отмечайте изменения в своем настроении и концентрации.</p>',
+                    aiPrompt: 'Как специалист по медитации, дай план медитации на 15 дней. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-meditation-20day': {
+                    title: 'Медитация — день 20',
+                    info: '<p>На двадцатый день вы углубляете свою практику. Возможно, вы захотите изучить более сложные концепции медитации или присоединиться к группе. Медитация становится источником спокойствия и ясности.</p>',
+                    aiPrompt: 'Как специалист по медитации, дай план медитации на 20 дней. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-meditation-30day': {
+                    title: 'Медитация — день 30',
+                    info: '<p>Месяц регулярной медитации — это значительное достижение! Вы развили устойчивую практику и можете ощущать её благотворное влияние на свою жизнь. Продолжайте исследовать и углублять свои знания.</p>',
+                    aiPrompt: 'Как специалист по медитации, дай план медитации на 30 дней. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-habits-0day': {
+                    title: '100 дней без (вредных привычек) — 0',
+                    info: '<p>Сегодня — день ноль! Определите одну вредную привычку, от которой вы хотите избавиться. Запишите, почему это важно для вас. Подготовьтесь к вызовам и найдите замену привычке.</p>',
+                    aiPrompt: 'Как коуч по привычкам, дай советы, как начать 100 дней без вредных привычек. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-habits-10day': {
+                    title: '100 дней без (вредных привычек) — 10',
+                    info: '<p>Десять дней — это уже прогресс! Отмечайте свои успехи. Если были срывы, не отчаивайтесь, просто начните заново. Продолжайте искать поддержку и напоминать себе о своей цели.</p>',
+                    aiPrompt: 'Как коуч по привычкам, дай советы, как продержаться 10 дней без вредных привычек. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-habits-40day': {
+                    title: '100 дней без (вредных привычек) — 40',
+                    info: '<p>Сорок дней — это впечатляющий результат! Привычка уже ослабевает. Продолжайте укреплять свою решимость, избегайте триггеров и отмечайте, как улучшается ваша жизнь без этой привычки.</p>',
+                    aiPrompt: 'Как коуч по привычкам, дай советы, как продержаться 40 дней без вредных привычек. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-habits-100day': {
+                    title: '100 дней без (вредных привычек) — 100',
+                    info: '<p>Поздравляем! Вы достигли 100 дней без вредной привычки! Это огромное достижение, демонстрирующее вашу силу воли и самодисциплину. Теперь вы можете закрепить этот результат и, возможно, взяться за следующую цель.</p>',
+                    aiPrompt: 'Как коуч по привычкам, дай советы, как закрепить результат 100 дней без вредных привычек и двигаться дальше. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-sugar-1day': {
+                    title: 'Сахар — 1 день',
+                    info: '<p>Один день без сахара — это начало! Избегайте всех продуктов с добавленным сахаром. Сосредоточьтесь на свежих фруктах, овощах и цельных продуктах. Пейте больше воды.</p>',
+                    aiPrompt: 'Как диетолог, дай советы, как продержаться 1 день без сахара. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-sugar-5day': {
+                    title: 'Сахар — 5 дней',
+                    info: '<p>К пятому дню вы можете почувствовать снижение тяги. Продолжайте читать этикетки продуктов. Найдите здоровые альтернативы сладкому, например, ягоды или орехи.</p>',
+                    aiPrompt: 'Как диетолог, дай советы, как продержаться 5 дней без сахара. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-sugar-10day': {
+                    title: 'Сахар — 10 дней',
+                    info: '<p>На десятый день ваш организм начинает перестраиваться. Вы можете заметить улучшение энергии и настроения. Продолжайте экспериментировать с новыми рецептами без сахара.</p>',
+                    aiPrompt: 'Как диетолог, дай советы, как продержаться 10 дней без сахара. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-sugar-15day': {
+                    title: 'Сахар — 15 дней',
+                    info: '<p>К пятнадцатому дню вы уже привыкаете к новому рациону. Тяга к сладкому значительно уменьшится. Сосредоточьтесь на разнообразии питания и получении всех необходимых питательных веществ.</p>',
+                    aiPrompt: 'Как диетолог, дай советы, как продержаться 15 дней без сахара. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-sugar-20day': {
+                    title: 'Сахар — 20 дней',
+                    info: '<p>На двадцатый день вы уже эксперт в отказе от сахара! Продолжайте делиться своим опытом и вдохновлять других. Поддерживайте свой прогресс, делая осознанный выбор в питании.</p>',
+                    aiPrompt: 'Как диетолог, дай советы, как продержаться 20 дней без сахара. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-sugar-30day': {
+                    title: 'Сахар — 30 дней',
+                    info: '<p>Месяц без сахара — это невероятное достижение! Вы полностью изменили свои пищевые привычки и улучшили свое здоровье. Продолжайте наслаждаться натуральными вкусами и поддерживать здоровый образ жизни.</p>',
+                    aiPrompt: 'Как диетолог, дай советы, как продержаться 30 дней без сахара и поддерживать результат. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-healthy-eating': {
+                    title: 'Правильное питание',
+                    info: '<p>Правильное питание — это основа здоровья. Сосредоточьтесь на цельных, необработанных продуктах: овощах, фруктах, нежирном белке, цельнозерновых. Избегайте фастфуда и полуфабрикатов.</p>',
+                    aiPrompt: 'Как диетолог, дай основные принципы правильного питания для начинающих. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-better-sleep': {
+                    title: 'Лучше спать',
+                    info: '<p>Качественный сон критически важен. Установите регулярный график сна, создайте расслабляющую рутину перед сном, избегайте кофеина и тяжелой пищи вечером. Обеспечьте темную и тихую спальню.</p>',
+                    aiPrompt: 'Как сомнолог, дай советы, как улучшить качество сна. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-fat-percent': {
+                    title: 'Нормализовать % жира',
+                    info: '<p>Нормализация процента жира в организме требует комплексного подхода: сбалансированное питание (дефицит калорий), регулярные физические нагрузки (кардио и силовые), достаточный сон и снижение стресса.</p>',
+                    aiPrompt: 'Как фитнес-тренер, дай план по нормализации процента жира в организме. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                // Educational and Creative Skills
+                'skills-wimhof': {
+                    title: 'Техника Вим Хофа',
+                    info: '<p>Техника Вим Хофа включает дыхательные упражнения, воздействие холодом и развитие сосредоточенности. Она направлена на улучшение физического и ментального здоровья, повышение иммунитета и энергии. Начните с изучения основ дыхания.</p>',
+                    aiPrompt: 'Как инструктор по технике Вим Хофа, объясни основы техники и как ее практиковать. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-notebook': {
+                    title: 'Вести блокнот',
+                    info: '<p>Ведение блокнота помогает структурировать мысли, планировать задачи и отслеживать прогресс. Вы можете использовать его для ведения дневника, записи идей, составления списков или обучения. Начните с ежедневных записей.</p>',
+                    aiPrompt: 'Как эксперт по продуктивности, дай советы, как эффективно вести блокнот для саморазвития. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-diction': {
+                    title: 'Заниматься дикцией',
+                    info: '<p>Хорошая дикция улучшает коммуникацию и уверенность в себе. Практикуйте скороговорки, делайте артикуляционные упражнения, читайте вслух. Записывайте себя, чтобы отслеживать прогресс.</p>',
+                    aiPrompt: 'Как преподаватель ораторского искусства, дай упражнения для улучшения дикции. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-3d-blender': {
+                    title: '3D-блендер',
+                    info: '<p>Blender — мощный инструмент для 3D-моделирования, анимации и рендеринга. Начните с изучения интерфейса и базовых операций: создание объектов, перемещение, масштабирование. Существует множество бесплатных уроков онлайн.</p>',
+                    aiPrompt: 'Как 3D-художник, дай пошаговый план, как начать изучать 3D-блендер для новичков. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-drawing': {
+                    title: 'Научиться рисовать',
+                    info: '<p>Рисование — это навык, который можно развить. Начните с основ: форм, перспективы, света и тени. Практикуйтесь ежедневно, даже по 15-20 минут. Используйте референсы и не бойтесь экспериментировать.</p>',
+                    aiPrompt: 'Как художник, дай советы, как научиться рисовать с нуля. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-timemanagement': {
+                    title: 'Настроить тайм-менеджмент',
+                    info: '<p>Эффективный тайм-менеджмент помогает достигать целей и снижать стресс. Используйте такие техники, как Pomodoro, матрица Эйзенхауэра, или просто составляйте списки дел. Определите свои приоритеты.</p>',
+                    aiPrompt: 'Как эксперт по тайм-менеджменту, дай советы, как настроить эффективный тайм-менеджмент. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-rubikscube': {
+                    title: 'Сборка кубика Рубика',
+                    info: '<p>Сборка кубика Рубика развивает логику и мелкую моторику. Начните с изучения метода для начинающих (послойная сборка). Запомните несколько алгоритмов и практикуйтесь регулярно. Есть много видеоуроков.</p>',
+                    aiPrompt: 'Как спидкубер, дай пошаговую инструкцию, как собрать кубик Рубика для начинающих. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'skills-math-logic': {
+                    title: 'Учить математику / логические стили',
+                    info: '<p>Развитие математических и логических навыков полезно в любой сфере. Решайте головоломки, изучайте основы логики, практикуйтесь в решении задач. Онлайн-курсы и учебники могут помочь.</p>',
+                    aiPrompt: 'Как преподаватель математики, дай советы, как эффективно учить математику или развивать логическое мышление. Включи ссылки на полезные ресурсы и места для практики.'
+                }
+            };
+
+            const lessonContents = {
+                // Languages
+                'lesson-english': {
+                    title: 'Английский язык',
+                    info: '<p>Английский — это глобальный язык общения, открывающий двери к новым знаниям, путешествиям и карьерным возможностям. Начните с основ грамматики и словарного запаса, постепенно погружаясь в языковую среду.</p>',
+                    resources: [
+                        { name: 'English with Lucy', url: 'https://www.youtube.com/user/EnglishwithLucy', type: 'YouTube' },
+                        { name: 'Duolingo', url: 'https://www.duolingo.com/', type: 'Курс' },
+                        { name: 'BBC Learning English', url: 'https://www.bbc.co.uk/learningenglish/', type: 'Ресурс' },
+                        { name: 'Quizlet (словарный тренажер)', url: 'https://quizlet.com/', type: 'Тренажер' }
+                    ],
+                    aiPrompt: 'Как преподаватель английского, дай советы по изучению английского языка для начинающих. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'lesson-spanish': {
+                    title: 'Испанский язык',
+                    info: '<p>Испанский язык является одним из самых распространенных в мире. Его изучение поможет вам понять культуру Латинской Америки и Испании, а также расширить круг общения.</p>',
+                    resources: [
+                        { name: 'SpanishDict', url: 'https://www.youtube.com/user/SpanishDict', type: 'YouTube' },
+                        { name: 'Busuu', url: 'https://www.busuu.com/', type: 'Курс' },
+                        { name: 'Conjuguemos (грамматика)', url: 'https://conjuguemos.com/', type: 'Тренажер' }
+                    ],
+                    aiPrompt: 'Как преподаватель испанского, дай советы по изучению испанского языка. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'lesson-german': {
+                    title: 'Немецкий язык',
+                    info: '<p>Немецкий язык — ключ к культуре Германии, Австрии и Швейцарии, а также важный язык в науке и инженерии. Его изучение развивает логическое мышление.</p>',
+                    resources: [
+                        { name: 'Learn German with Anja', url: 'https://www.youtube.com/channel/UCZp_f9C6z_x8i_TzQj_7r4A', type: 'YouTube' },
+                        { name: 'Deutsche Welle Learn German', url: 'https://www.dw.com/en/learn-german/s-2459', type: 'Ресурс' },
+                        { name: 'Memrise', url: 'https://www.memrise.com/', type: 'Курс' }
+                    ],
+                    aiPrompt: 'Как преподаватель немецкого, дай советы по изучению немецкого языка. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'lesson-french': {
+                    title: 'Французский язык',
+                    info: '<p>Французский язык — язык искусства, моды, кулинарии и дипломатии. Его изучение открывает доступ к богатому культурному наследию.</p>',
+                    resources: [
+                        { name: 'Learn French With Alexa', url: 'https://www.youtube.com/user/learnfrenchwithalexa', type: 'YouTube' },
+                        { name: 'Alliance Française', url: 'https://www.alliancefrancaise.org/', type: 'Курс' }
+                    ],
+                    aiPrompt: 'Как преподаватель французского, дай советы по изучению французского языка. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'lesson-chinese': {
+                    title: 'Китайский язык',
+                    info: '<p>Китайский (мандарин) — самый распространенный язык в мире. Его изучение поможет вам понять одну из древнейших культур и открыть новые возможности в бизнесе.</p>',
+                    resources: [
+                        { name: 'Yoyo Chinese', url: 'https://www.youtube.com/user/YoyoChinese', type: 'YouTube' },
+                        { name: 'HSK Online', url: 'https://www.hskonline.com/', type: 'Курс' }
+                    ],
+                    aiPrompt: 'Как преподаватель китайского, дай советы по изучению китайского языка. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                // Sciences
+                'lesson-physics': {
+                    title: 'Физика',
+                    info: '<p>Физика — наука о природе, изучающая материю, энергию и их взаимодействие. Понимание физических законов помогает объяснить мир вокруг нас.</p>',
+                    resources: [
+                        { name: 'Veritasium', url: 'https://www.youtube.com/user/1veritasium', type: 'YouTube' },
+                        { name: 'Khan Academy: Физика', url: 'https://www.khanacademy.org/science/physics', type: 'Курс' },
+                        { name: 'PhET Interactive Simulations', url: 'https://phet.colorado.edu/', type: 'Тренажер' }
+                    ],
+                    aiPrompt: 'Как преподаватель физики, объясни основы физики для начинающих. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'lesson-chemistry': {
+                    title: 'Химия',
+                    info: '<p>Химия изучает состав, свойства и превращения веществ. Это фундаментальная наука, лежащая в основе многих технологий и процессов в природе.</p>',
+                    resources: [
+                        { name: 'CrashCourse Chemistry', url: 'https://www.youtube.com/playlist?list=PL8dPuuaLjXtPHzzYuWy6fYEaX9mQQ8oGr', type: 'YouTube' },
+                        { name: 'Khan Academy: Химия', url: 'https://www.khanacademy.org/science/chemistry', type: 'Курс' }
+                    ],
+                    aiPrompt: 'Как преподаватель химии, объясни основы химии для начинающих. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'lesson-biology': {
+                    title: 'Биология',
+                    info: '<p>Биология — наука о жизни, изучающая живые организмы, их строение, функции, развитие и взаимодействие с окружающей средой.</p>',
+                    resources: [
+                        { name: 'Amoeba Sisters', url: 'https://www.youtube.com/user/AmoebaSisters', type: 'YouTube' },
+                        { name: 'Khan Academy: Биология', url: 'https://www.khanacademy.org/science/biology', type: 'Курс' }
+                    ],
+                    aiPrompt: 'Как преподаватель биологии, объясни основы биологии для начинающих. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'lesson-astronomy': {
+                    title: 'Астрономия',
+                    info: '<p>Астрономия — наука о Вселенной, изучающая небесные тела, их движение, строение, происхождение и эволюцию.</p>',
+                    resources: [
+                        { name: 'Kurzgesagt – In a Nutshell', url: 'https://www.youtube.com/user/Kurzgesagt', type: 'YouTube' },
+                        { name: 'NASA Official', url: 'https://www.nasa.gov/', type: 'Ресурс' }
+                    ],
+                    aiPrompt: 'Как астроном, объясни основы астрономии для начинающих. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                // Programming
+                'lesson-python': {
+                    title: 'Программирование на Python',
+                    info: '<p>Python — один из самых популярных языков программирования, используемый в веб-разработке, анализе данных, искусственном интеллекте и многих других областях. Он прост в освоении и очень гибок.</p>',
+                    resources: [
+                        { name: 'Codecademy', url: 'https://www.youtube.com/user/Codecademy', type: 'YouTube' },
+                        { name: 'Codecademy: Python', url: 'https://www.codecademy.com/learn/learn-python-3', type: 'Курс' },
+                        { name: 'LeetCode (задачи по программированию)', url: 'https://leetcode.com/', type: 'Тренажер' }
+                    ],
+                    aiPrompt: 'Как программист, дай пошаговый план изучения Python для новичков. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'lesson-javascript': {
+                    title: 'Программирование на JavaScript',
+                    info: '<p>JavaScript — основной язык для веб-разработки на стороне клиента, позволяющий создавать интерактивные и динамичные веб-страницы. Также используется на сервере (Node.js) и для мобильных приложений (React Native).</p>',
+                    resources: [
+                        { name: 'Traversy Media', url: 'https://www.youtube.com/user/TechGuyWeb', type: 'YouTube' },
+                        { name: 'freeCodeCamp', url: 'https://www.freecodecamp.org/', type: 'Курс' },
+                        { name: 'MDN Web Docs: JavaScript', url: 'https://developer.mozilla.org/ru/docs/Web/JavaScript', type: 'Ресурс' }
+                    ],
+                    aiPrompt: 'Как веб-разработчик, дай пошаговый план изучения JavaScript для новичков. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'lesson-webdev': {
+                    title: 'Веб-разработка',
+                    info: '<p>Веб-разработка — это процесс создания веб-сайтов и веб-приложений. Она включает в себя изучение HTML, CSS, JavaScript и серверных технологий.</p>',
+                    resources: [
+                        { name: 'The Net Ninja', url: 'https://www.youtube.com/channel/UCW5YeuTygf_bc-rz1Qhws0Q', type: 'YouTube' },
+                        { name: 'Odin Project', url: 'https://www.theodinproject.com/', type: 'Курс' },
+                        { name: 'W3Schools', url: 'https://www.w3schools.com/', type: 'Ресурс' }
+                    ],
+                    aiPrompt: 'Как эксперт по веб-разработке, дай план изучения веб-разработки с нуля. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'lesson-mobiledev': {
+                    title: 'Мобильная разработка',
+                    info: '<p>Мобильная разработка — это создание приложений для смартфонов и планшетов (iOS, Android). Можно использовать нативные языки (Swift/Kotlin) или кроссплатформенные фреймворки (React Native, Flutter).</p>',
+                    resources: [
+                        { name: 'Academind', url: 'https://www.youtube.com/c/Academind', type: 'YouTube' },
+                        { name: 'Udemy (курсы по мобильной разработке)', url: 'https://www.udemy.com/courses/development/mobile-apps/', type: 'Курс' }
+                    ],
+                    aiPrompt: 'Как мобильный разработчик, дай план изучения мобильной разработки. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                // Art and Design
+                'lesson-graphicdesign': {
+                    title: 'Графический дизайн',
+                    info: '<p>Графический дизайн — это искусство визуальной коммуникации, использующее изображения, типографику и пространство для передачи сообщений. Важен для брендинга, рекламы и веб-дизайна.</p>',
+                    resources: [
+                        { name: 'Satori Graphics', url: 'https://www.youtube.com/channel/UCsS_oW_b0XWd47t71Q0G_1w', type: 'YouTube' },
+                        { name: 'Canva Design School', url: 'https://www.canva.com/learn/design-school/', type: 'Курс' },
+                        { name: 'Adobe Creative Cloud (программы)', url: 'https://www.adobe.com/ru/creativecloud.html', type: 'Инструмент' }
+                    ],
+                    aiPrompt: 'Как графический дизайнер, дай советы по изучению графического дизайна для начинающих. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'lesson-musictheory': {
+                    title: 'Музыкальная теория',
+                    info: '<p>Музыкальная теория — это изучение основ музыки, включая нотную грамоту, гармонию, ритм и форму. Помогает лучше понимать и создавать музыку.</p>',
+                    resources: [
+                        { name: '8-Bit Music Theory', url: 'https://www.youtube.com/channel/UCeZLO2VztxDKL3y84ttJ0gA', type: 'YouTube' },
+                        { name: 'Teoria.com (интерактивные упражнения)', url: 'https://www.teoria.com/', type: 'Тренажер' }
+                    ],
+                    aiPrompt: 'Как преподаватель музыки, объясни основы музыкальной теории. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'lesson-photography': {
+                    title: 'Фотография',
+                    info: '<p>Фотография — это искусство создания изображений с помощью света. Изучение основ композиции, экспозиции и обработки поможет вам делать качественные и выразительные снимки.</p>',
+                    resources: [
+                        { name: 'Peter McKinnon', url: 'https://www.youtube.com/user/petermckinnon24', type: 'YouTube' },
+                        { name: 'National Geographic Photography', url: 'https://www.nationalgeographic.com/photography/', type: 'Ресурс' }
+                    ],
+                    aiPrompt: 'Как фотограф, дай советы по изучению фотографии для начинающих. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                // Personal Development
+                'lesson-publicspeaking': {
+                    title: 'Публичные выступления',
+                    info: '<p>Навык публичных выступлений помогает уверенно и убедительно доносить свои мысли до аудитории. Это важно для карьеры, образования и личной жизни.</p>',
+                    resources: [
+                        { name: 'TED', url: 'https://www.youtube.com/ted', type: 'YouTube' },
+                        { name: 'Toastmasters International', url: 'https://www.toastmasters.org/', type: 'Клуб' }
+                    ],
+                    aiPrompt: 'Как тренер по публичным выступлениям, дай советы по улучшению навыков публичных выступлений. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'lesson-criticalthinking': {
+                    title: 'Критическое мышление',
+                    info: '<p>Критическое мышление — это способность анализировать информацию, выявлять предвзятость, оценивать аргументы и формировать обоснованные суждения. Важно для принятия решений и решения проблем.</p>',
+                    resources: [
+                        { name: 'School of Life', url: 'https://www.youtube.com/user/theschooloflife', type: 'YouTube' },
+                        { name: 'Coursera: Critical Thinking Courses', url: 'https://www.coursera.org/courses?query=critical%20thinking', type: 'Курс' }
+                    ],
+                    aiPrompt: 'Как эксперт по критическому мышлению, дай советы по развитию критического мышления. Включи ссылки на полезные ресурсы и места для практики.'
+                },
+                'lesson-emotionalintelligence': {
+                    title: 'Эмоциональный интеллект',
+                    info: '<p>Эмоциональный интеллект — это способность понимать и управлять своими эмоциями, а также распознавать и влиять на эмоции других. Помогает строить крепкие отношения и успешно взаимодействовать в социуме.</p>',
+                    resources: [
+                        { name: 'Daniel Goleman', url: 'https://www.youtube.com/results?search_query=daniel+goleman+emotional+intelligence', type: 'YouTube' },
+                        { name: 'Mindfulness Based Stress Reduction (MBSR)', url: 'https://www.umassmed.edu/cfm/mindfulness-programs/mbsr/', type: 'Курс' }
+                    ],
+                    aiPrompt: 'Как психолог, дай советы по развитию эмоционального интеллекта. Включи ссылки на полезные ресурсы и места для практики.'
+                }
+            };
+
+            if (skillContents[pageId]) {
+                const content = skillContents[pageId];
+                pageTitle = content.title;
+                pageContent = `
+                    <div class="page-section">
+                        <h3>${content.title}</h3>
+                        ${content.info}
+                        <button class="llm-button" id="llm-skill-specific">✨Спросить AI</button>
+                    </div>
+                `;
+                setTimeout(() => {
+                    const llmSkillSpecificButton = document.getElementById('llm-skill-specific');
+                    if (llmSkillSpecificButton) {
+                        llmSkillSpecificButton.onclick = () => {
+                            let aiPersona = '';
+                            if (pageId.startsWith('skills-finance') || pageId.startsWith('skills-books') || pageId.startsWith('skills-english') || pageId.startsWith('skills-sign-language')) {
+                                aiPersona = 'Как финансовый консультант и эксперт по обучению';
+                            } else if (pageId.startsWith('skills-sport') || pageId.startsWith('skills-meditation') || pageId.startsWith('skills-habits') || pageId.startsWith('skills-sugar') || pageId.startsWith('skills-healthy-eating') || pageId.startsWith('skills-better-sleep') || pageId.startsWith('skills-fat-percent')) {
+                                aiPersona = 'Как фитнес-тренер и специалист по ментальному здоровью';
+                            } else if (pageId.startsWith('skills-wimhof') || pageId.startsWith('skills-notebook') || pageId.startsWith('skills-diction') || pageId.startsWith('skills-3d-blender') || pageId.startsWith('skills-drawing') || pageId.startsWith('skills-timemanagement') || pageId.startsWith('skills-rubikscube') || pageId.startsWith('skills-math-logic')) {
+                                aiPersona = 'Как образовательный и творческий наставник';
+                            }
+                            showLlmModal(`AI-помощник: ${content.title}`, true, `Введите ваш вопрос о "${content.title}"...`, content.aiPrompt, aiPersona);
+                            llmModalSubmitButton.onclick = async () => {
+                                const query = llmModalTextarea.value.trim();
+                                if (query || currentImageBase64) {
+                                    llmModalInputArea.classList.add('hidden');
+                                    llmModalResponseArea.classList.remove('hidden');
+                                    const fullQuery = aiPersona ? `${aiPersona}, ${query}` : query;
+                                    await callGeminiAPI(fullQuery, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                }
+                            };
+                        };
+                    }
+                }, 0);
+            } else if (lessonContents[pageId]) {
+                const content = lessonContents[pageId];
+                pageTitle = content.title;
+                let resourcesHtml = '';
+                if (content.resources && content.resources.length > 0) {
+                    resourcesHtml = `
+                        <h3>Ресурсы:</h3>
+                        <ul>
+                            ${content.resources.map(res => `<li><a href="${res.url}" target="_blank">${res.name} (${res.type})</a></li>`).join('')}
+                        </ul>
+                    `;
+                }
+
+                pageContent = `
+                    <div class="page-section">
+                        <h3>${content.title}</h3>
+                        ${content.info}
+                    </div>
+                    <div class="page-section">
+                        ${resourcesHtml}
+                    </div>
+                    <button class="llm-button" id="llm-lesson-specific">✨Спросить AI</button>
+                `;
+                setTimeout(() => {
+                    const llmLessonSpecificButton = document.getElementById('llm-lesson-specific');
+                    if (llmLessonSpecificButton) {
+                        llmLessonSpecificButton.onclick = () => {
+                            showLlmModal(`AI-помощник: ${content.title}`, true, `Введите ваш вопрос о "${content.title}"...`, content.aiPrompt);
+                            llmModalSubmitButton.onclick = async () => {
+                                const query = llmModalTextarea.value.trim();
+                                if (query || currentImageBase64) {
+                                    llmModalInputArea.classList.add('hidden');
+                                    llmModalResponseArea.classList.remove('hidden');
+                                    await callGeminiAPI(query, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                }
+                            };
+                        };
+                    }
+                }, 0);
+
+            } else {
+                switch (pageId) {
+                    case 'home':
+                        pageTitle = 'Путь Развития';
+                        pageContent = `
+                            <div class="button-grid">
+                                <button class="main-button" data-page="anti-masturbation">АНТИДРОЧ</button>
+                                <button class="main-button" data-page="sugar">САХАР</button>
+                                <button class="main-button" data-page="skills">НАВЫКИ</button>
+                                <button class="main-button" data-page="why-live">ЗАЧЕМ ЖИТЬ</button>
+                                <button class="main-button" data-page="lofi">LO-FI</button>
+                                <button class="main-button" data-page="telegram">TELEGRAM</button>
+                                <button class="main-button" data-page="books">КНИГИ</button>
+                                <button class="main-button" data-page="lessons">УРОКИ</button>
+                                <button class="main-button" data-page="movies">ФИЛЬМЫ</button>
+                                <button class="main-button" data-page="pomodoro">МЕТОД ПОМИДОРА</button>
+                                <button class="main-button" data-page="career-guidance">ПРОФОРИЕНТАЦИЯ</button>
+                                <button class="main-button" data-page="github">GITHUB</button>
+                            </div>
+                        `;
+                        break;
+                    case 'anti-masturbation':
+                        pageTitle = 'АНТИДРОЧ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Борьба с зависимостью</h3>
+                                <p>Зависимость от мастурбации может негативно влиять на вашу жизнь, снижая мотивацию, социальную активность и общее благополучие. Важно осознать проблему и начать путь к выздоровлению.</p>
+                                <p>Это не просто вопрос силы воли, а часто глубоко укоренившаяся привычка, требующая комплексного подхода и поддержки.</p>
+                            </div>
+                            <div class="page-section">
+                                <h3>Полезные ресурсы:</h3>
+                                <ul>
+                                    <li><a href="https://www.youtube.com/watch?v=your_video_id_1" target="_blank">Как бросить мастурбировать? (Видео)</a></li>
+                                    <li><a href="https://www.youtube.com/watch?v=your_video_id_2" target="_blank">Почему нельзя мастурбировать (Видео)</a></li>
+                                    <li><a href="https://www.nofap.com/" target="_blank">NoFap (Сайт сообщества)</a></li>
+                                </ul>
+                            </div>
+                            <button class="llm-button" id="llm-anti-masturbation-help">✨Спросить AI о помощи</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-anti-masturbation-help').onclick = () => {
+                                showLlmModal('AI-помощник: Антидроч', true, 'Как бороться с зависимостью от мастурбации?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о борьбе с зависимостью от мастурбации: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'books':
+                        pageTitle = 'КНИГИ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Полезные книги для развития:</h3>
+                                <div class="button-grid">
+                                    <a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="sub-button">ФЛИБУСТА (Пример PDF)</a>
+                                    <a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="sub-button">BOOKBOON (Пример PDF)</a>
+                                    <a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="sub-button">TWERPX (Пример PDF)</a>
+                                    <a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="sub-button">QORJ (Пример PDF)</a>
+                                </div>
+                                <button class="llm-button" id="llm-book-summary">✨Узнать о книге</button>
+                                <button class="llm-button" id="llm-book-suggest">✨Посоветовать книгу</button>
+                            </div>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-book-summary').onclick = () => {
+                                showLlmModal('Узнать о книге', true, 'Введите название книги для получения краткого обзора...');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const bookTitle = llmModalTextarea.value.trim();
+                                    if (bookTitle || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        // Request image URL and summary
+                                        await callGeminiAPI(`Сделай краткий обзор книги "${bookTitle}". Включи автора, жанр и краткое содержание. Добавь вымышленную ссылку на обложку книги в формате Markdown: ![Обложка книги](https://placehold.co/150x200/000000/FFFFFF?text=Обложка+книги) и вымышленную ссылку на книгу (например, на Flibusta или другой бесплатный источник) в формате Markdown: [Читать книгу](https://flibusta.is/book/123456). Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                            document.getElementById('llm-book-suggest').onclick = () => {
+                                showLlmModal('Посоветовать книгу', true, 'Расскажите о ваших интересах (например, фантастика, саморазвитие, история)...');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const interests = llmModalTextarea.value.trim();
+                                    if (interests || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Посоветуй несколько книг на основе моих интересов: "${interests}". Для каждой книги укажи автора, жанр, краткое содержание и вымышленную ссылку на обложку книги в формате Markdown: ![Обложка книги](https://placehold.co/150x200/000000/FFFFFF?text=Обложка+книги) и вымышленную ссылку на книгу (например, на Flibusta или другой бесплатный источник) в формате Markdown: [Читать книгу](https://flibusta.is/book/123456). Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar':
+                        pageTitle = 'САХАР';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Вред сахара</h3>
+                                <p>Сахар стимулирует выработку дофамина — нейромедиатора, отвечающего за чувство удовольствия. Со временем мозг требует всё больше сахара для достижения того же эффекта, что приводит к формированию зависимости.</p>
+                                <p>Некоторые исследования показывают, что сахарная зависимость может быть даже сложнее для лечения, чем героиновая, из-за её повсеместного распространения и социальной приемлемости.</p>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="sugar-craving">ТЯГА</button>
+                                    <button class="sub-button" data-subpage="sugar-harm">ВРЕД</button>
+                                    <button class="sub-button" data-subpage="sugar-refusal">ОТКАЗ</button>
+                                    <button class="sub-button" data-subpage="sugar-resources">РЕСУРСЫ</button>
+                                </div>
+                                <button class="llm-button" id="llm-sugar-tips">✨Персональные советы</button>
+                            </div>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-sugar-tips').onclick = () => {
+                                showLlmModal('Персональные советы по сахару', true, 'Опишите ваши текущие привычки потребления сахара (например, "ем много сладкого каждый день", "иногда пью газировку")...');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const habits = llmModalTextarea.value.trim();
+                                    if (habits || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Дай персонализированные советы по снижению потребления сахара, учитывая мои привычки: "${habits}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar-craving':
+                        pageTitle = 'САХАР: ТЯГА';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Тяга к сахару</h3>
+                                <p>Сахар стимулирует выработку дофамина — нейромедиатора, отвечающего за чувство удовольствия. Со временем мозг требует всё больше сахара для достижения того же эффекта, что приводит к формированию зависимости.</p>
+                                <p>Некоторые исследования показывают, что сахарная зависимость может быть даже сложнее для лечения, чем героиновая, из-за её повсеместного распространения и социальной приемлемости.</p>
+                            </div>
+                            <div class="page-section">
+                                <h3>Видео по теме:</h3>
+                                <div class="video-container">
+                                    <iframe src="https://www.youtube.com/embed/nzJdhXzjz1o?si=_RBZp5mTLtYF10Oj" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <p><i></i></p>
+                            </div>
+                            <button class="llm-button" id="llm-sugar-craving-help">✨Спросить AI о тяге к сахару</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-sugar-craving-help').onclick = () => {
+                                showLlmModal('AI-помощник: Тяга к сахару', true, 'Как справиться с тягой к сладкому?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о тяге к сахару: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar-harm':
+                        pageTitle = 'САХАР: ВРЕД';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Вред сахара для организма:</h3>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="sugar-harm-obesity">Ожирение</button>
+                                    <button class="sub-button" data-subpage="sugar-harm-diabetes">Диабет</button>
+                                    <button class="sub-button" data-subpage="sugar-harm-heart">Сердце</button>
+                                    <button class="sub-button" data-subpage="sugar-harm-skin">Кожа</button>
+                                    <button class="sub-button" data-subpage="sugar-harm-teeth">Зубы</button>
+                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-sugar-harm-info">✨Спросить AI о вреде сахара</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-sugar-harm-info').onclick = () => {
+                                showLlmModal('AI-помощник: Вред сахара', true, 'Расскажи подробнее о вреде сахара для [орган/система].');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о вреде сахара: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar-harm-obesity':
+                        pageTitle = 'САХАР: ОЖИРЕНИЕ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Ожирение</h3>
+                                <p>Сахар — источник "пустых" калорий, не дающих сытости, но способствующих накоплению жира и лишнему весу.</p>
+                            </div>
+                            <div class="page-section">
+                                <h3>Видео по теме:</h3>
+                                <div class="video-container">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/20It6Yc8Cts?si=ZgzHk5JrGRsbNIhY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-obesity-info">✨Спросить AI об ожирении</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-obesity-info').onclick = () => {
+                                showLlmModal('AI-помощник: Ожирение', true, 'Как сахар способствует ожирению?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос об ожирении, связанном с сахаром: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar-harm-diabetes':
+                        pageTitle = 'САХАР: ДИАБЕТ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Диабет</h3>
+                                <p>Частое потребление сахара вызывает инсулинорезистентность — состояние, предшествующее развитию диабета.</p>
+                            </div>
+                            <div class="page-section">
+                                <h3>Видео по теме:</h3>
+                                <div class="video-container">
+                                   <iframe width="560" height="315" src="https://www.youtube.com/embed/nOZbxalygkI?si=PCcPqSj-rBU0NBzq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-diabetes-info">✨Спросить AI о диабете</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-diabetes-info').onclick = () => {
+                                showLlmModal('AI-помощник: Диабет', true, 'Как предотвратить диабет, связанный с сахаром?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о диабете, связанном с сахаром: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar-harm-heart':
+                        pageTitle = 'САХАР: СЕРДЦЕ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Сердце</h3>
+                                <p>Сахар повышает "плохой" холестерин (ЛПНП) и давление, увеличивая риск инфарктов и инсультов.</p>
+                            </div>
+                            <div class="page-section">
+                                <h3>Видео по теме:</h3>
+                                <div class="video-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yO4sh2TW3C0?si=Crg_hc2scaB6eJMr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-heart-info">✨Спросить AI о сердце</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-heart-info').onclick = () => {
+                                showLlmModal('AI-помощник: Сердце', true, 'Как сахар влияет на здоровье сердца?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о влиянии сахара на сердце: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar-harm-skin':
+                        pageTitle = 'САХАР: КОЖА';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Кожа</h3>
+                                <p>Избыток сахара ускоряет гликацию — процесс, разрушающий коллаген, что приводит к морщинам и потере упругости.</p>
+                            </div>
+                            <div class="page-section">
+                                <h3>Видео по теме:</h3>
+                                <div class="video-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/CzAM0xvFd_I?si=2tGoD5whlDJtzLLA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-skin-info">✨Спросить AI о коже</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-skin-info').onclick = () => {
+                                showLlmModal('AI-помощник: Кожа', true, 'Как сахар влияет на кожу и старение?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о влиянии сахара на кожу: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar-harm-teeth':
+                        pageTitle = 'САХАР: ЗУБЫ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Зубы</h3>
+                                <p>Сахар питает бактерии во рту, вызывающие кислотную эрозию эмали и развитие кариеса.</p>
+                            </div>
+                            <div class="page-section">
+                                <h3>Видео по теме:</h3>
+                                <div class="video-container">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ayXiizPs5lU?si=rN4lEzDPWFKN6Olj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-teeth-info">✨Спросить AI о зубах</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-teeth-info').onclick = () => {
+                                showLlmModal('AI-помощник: Зубы', true, 'Как сахар разрушает зубы?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о влиянии сахара на зубы: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar-refusal':
+                        pageTitle = 'САХАР: ОТКАЗ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Как отказаться от сахара:</h3>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="sugar-refusal-nutrition">Питание</button>
+                                    <button class="sub-button" data-subpage="sugar-refusal-regimen">Режим</button>
+                                    <button class="sub-button" data-subpage="sugar-refusal-substitutes">Заменители</button>
+                                    <button class="sub-button" data-subpage="sugar-refusal-activity">Активность</button>
+                                    <button class="sub-button" data-subpage="sugar-refusal-support">Поддержка</button>
+                                </div>
+                                <div class="video-container" style="margin-top: 20px;">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZBITF09zwGk?si=h3wX25beV8radpWv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>        </div>
+                            </div>
+                            <button class="llm-button" id="llm-sugar-refusal-tips">✨Спросить AI об отказе от сахара</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-sugar-refusal-tips').onclick = () => {
+                                showLlmModal('AI-помощник: Отказ от сахара', true, 'Дай советы по отказу от сахара.');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос об отказе от сахара: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar-refusal-nutrition':
+                        pageTitle = 'САХАР: ПИТАНИЕ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Питание</h3>
+                                <p>Употребляйте больше белков и клетчатки, особенно в начале дня, чтобы стабилизировать уровень сахара в крови и уменьшить тягу к сладкому.</p>
+                            
+                            </div>
+                            <button class="llm-button" id="llm-nutrition-tips">✨Спросить AI о питании</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-nutrition-tips').onclick = () => {
+                                showLlmModal('AI-помощник: Питание', true, 'Какие продукты помогут снизить тягу к сахару?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о питании для отказа от сахара: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar-refusal-regimen':
+                        pageTitle = 'САХАР: РЕЖИМ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Режим</h3>
+                                <p>Избегайте голодания, чтобы предотвратить резкие колебания уровня глюкозы и последующую тягу к сладкому.</p>
+                            </div>
+                            
+                            </div>
+                            <button class="llm-button" id="llm-regimen-tips">✨Спросить AI о режиме</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-regimen-tips').onclick = () => {
+                                showLlmModal('AI-помощник: Режим', true, 'Как режим дня влияет на потребление сахара?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о режиме дня и его влиянии на сахар: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar-refusal-substitutes':
+                        pageTitle = 'САХАР: ЗАМЕНИТЕЛИ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Заменители</h3>
+                                <p>Используйте натуральные подсластители, такие как стевия или ксилит, которые не вызывают резких скачков сахара в крови.</p>
+                            </div>
+                            
+                            </div>
+                            <button class="llm-button" id="llm-substitutes-info">✨Спросить AI о заменителях</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-substitutes-info').onclick = () => {
+                                showLlmModal('AI-помощник: Заменители сахара', true, 'Какие натуральные заменители сахара существуют?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о заменителях сахара: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar-refusal-activity':
+                        pageTitle = 'САХАР: АКТИВНОСТЬ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Активность</h3>
+                                <p>Регулярные упражнения помогают регулировать уровень сахара в крови и уменьшают стресс, который может провоцировать тягу к сладкому.</p>
+                            </div>
+                            
+                            </div>
+                            <button class="llm-button" id="llm-activity-info">✨Спросить AI об активности</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-activity-info').onclick = () => {
+                                showLlmModal('AI-помощник: Активность', true, 'Как физическая активность помогает бороться с тягой к сахару?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о физической активности и сахаре: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar-refusal-support':
+                        pageTitle = 'САХАР: ПОДДЕРЖКА';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Поддержка</h3>
+                                <p>Обратитесь к специалисту, если чувствуете, что не справляетесь самостоятельно.</p>
+                            </div>
+                            
+                            </div>
+                            <button class="llm-button" id="llm-support-info">✨Спросить AI о поддержке</button>
+                        `
+                        ;
+                        setTimeout(() => {
+                            document.getElementById('llm-support-info').onclick = () => {
+                                showLlmModal('AI-помощник: Поддержка', true, 'Где найти поддержку при отказе от сахара?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о поддержке при отказе от сахара: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'sugar-resources':
+                        pageTitle = 'САХАР: РЕСУРСЫ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Полезные ресурсы:</h3>
+                                <ul>
+                                    <li><a href="https://lifehacker.ru/zavisimost-ot-sahara/?utm_source" target="_blank">15 способов справиться с зависимостью от сахара </a></li>
+                                    <li><a href="https://cgon.rospotrebnadzor.ru/naseleniyu/zdorovyy-obraz-zhizni/sakharnaya-zavisimost/?utm_source" target="_blank">Сахарная зависимость: мифы и факты </a></li>
+                                    <li><a href="https://www.philips.ru/c-e/ho/recepty-i-stati/stati/o-zdorovye/kakie-opasnosti-tait-v-sebe-chrezmernoe-upotreblenie-sahara.html?utm_source" target="_blank">Вред употребления сахара: полный гайд </a></li>
+                                    <li><a href="https://hi-food.ru/kak-otkazatsya-ot-sladkogo-i-muchnogo-raz-i-navsegda/?utm_source" target="_blank">Как отказаться от сладкого и мучного раз и навсегда </a></li>
+                                </ul>
+                            </div>
+                            <button class="llm-button" id="llm-sugar-resources-help">✨Спросить AI о ресурсах</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-sugar-resources-help').onclick = () => {
+                                showLlmModal('AI-помощник: Ресурсы по сахару', true, 'Посоветуй еще ресурсы по отказу от сахара.');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о ресурсах по отказу от сахара: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'skills':
+                        pageTitle = 'НАВЫКИ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Развитие навыков:</h3>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="skills-financial-intellectual">ФИНАНСОВЫЕ И ИНТЕЛЛЕКТУАЛЬНЫЕ</button>
+                                    <button class="sub-button" data-subpage="skills-physical-mental">ФИЗИЧЕСКОЕ И МЕНТАЛЬНОЕ</button>
+                                    <button class="sub-button" data-subpage="skills-educational-creative">ОБРАЗОВАТЕЛЬНЫЕ И ТВОРЧЕСКИЕ</button>
+                                </div>
+                                <button class="llm-button" id="llm-skill-plan">✨План обучения</button>
+                            </div>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-skill-plan').onclick = () => {
+                                showLlmModal('План обучения навыку', true, 'Какой навык вы хотите освоить? (например, "программирование на Python", "игра на гитаре")...');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const skill = llmModalTextarea.value.trim();
+                                    if (skill || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Создай пошаговый план обучения навыку "${skill}". Разбей его на этапы и предложи ресурсы. Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'skills-financial-intellectual':
+                        pageTitle = 'НАВЫКИ: ФИНАНСЫ И ИНТЕЛЛЕКТ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Финансовые и интеллектуальные цели:</h3>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="skills-finance-10k">Накопить 10,000</button>
+                                    <button class="sub-button" data-subpage="skills-finance-20k">Накопить 20,000</button>
+                                    <button class="sub-button" data-subpage="skills-finance-40k">Накопить 40,000</button>
+                                    <button class="sub-button" data-subpage="skills-finance-60k">Накопить 60,000</button>
+                                    <button class="sub-button" data-subpage="skills-finance-80k">Накопить 80,000</button>
+                                    <button class="sub-button" data-subpage="skills-finance-100k">Накопить 100,000</button>
+                                </div>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="skills-books-1">Прочесть 1 книгу</button>
+                                    <button class="sub-button" data-subpage="skills-books-2">Прочесть 2 книги</button>
+                                    <button class="sub-button" data-subpage="skills-books-4">Прочесть 4 книги</button>
+                                    <button class="sub-button" data-subpage="skills-books-8">Прочесть 8 книг</button>
+                                    <button class="sub-button" data-subpage="skills-books-10">Прочесть 10 книг</button>
+                                    <button class="sub-button" data-subpage="skills-books-12">Прочесть 12 книг</button>
+                                </div>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="skills-english-a1">Английский A1</button>
+                                    <button class="sub-button" data-subpage="skills-english-a2">Английский A2</button>
+                                    <button class="sub-button" data-subpage="skills-english-b1">Английский B1</button>
+                                    <button class="sub-button" data-subpage="skills-english-b2">Английский B2</button>
+                                    <button class="sub-button" data-subpage="skills-english-c1">Английский C1</button>
+                                    <button class="sub-button" data-subpage="skills-english-c2">Английский C2</button>
+                                </div>
+                                <button class="sub-button" data-subpage="skills-sign-language">Выучить язык жестов</button>
+                            </div>
+                            <button class="llm-button" id="llm-financial-intellectual-help">✨Спросить AI</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-financial-intellectual-help').onclick = () => {
+                                showLlmModal('AI-помощник: Финансы и интеллект', true, 'Как улучшить финансовую грамотность?', '', 'Как финансовый консультант и эксперт по обучению');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        const fullQuery = `${llmModalSubmitButton.dataset.aiPersona}, ${query}`;
+                                        await callGeminiAPI(fullQuery, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'skills-physical-mental':
+                        pageTitle = 'НАВЫКИ: ФИЗИЧЕСКОЕ И МЕНТАЛЬНОЕ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Физическое и ментальное развитие:</h3>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="skills-sport-1day">Спорт дома — день 1</button>
+                                    <button class="sub-button" data-subpage="skills-sport-5day">Спорт дома — день 5</button>
+                                    <button class="sub-button" data-subpage="skills-sport-10day">Спорт дома — день 10</button>
+                                    <button class="sub-button" data-subpage="skills-sport-15day">Спорт дома — день 15</button>
+                                    <button class="sub-button" data-subpage="skills-sport-20day">Спорт дома — день 20</button>
+                                    <button class="sub-button" data-subpage="skills-sport-30day">Спорт дома — день 30</button>
+                                </div>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="skills-meditation-1day">Медитация — день 1</button>
+                                    <button class="sub-button" data-subpage="skills-meditation-5day">Медитация — день 5</button>
+                                    <button class="sub-button" data-subpage="skills-meditation-10day">Медитация — день 10</button>
+                                    <button class="sub-button" data-subpage="skills-meditation-15day">Медитация — день 15</button>
+                                    <button class="sub-button" data-subpage="skills-meditation-20day">Медитация — день 20</button>
+                                    <button class="sub-button" data-subpage="skills-meditation-30day">Медитация — день 30</button>
+                                </div>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="skills-habits-0day">100 дней без (вредных привычек) — 0</button>
+                                    <button class="sub-button" data-subpage="skills-habits-10day">100 дней без (вредных привычек) — 10</button>
+                                    <button class="sub-button" data-subpage="skills-habits-40day">100 дней без (вредных привычек) — 40</button>
+                                    <button class="sub-button" data-subpage="skills-habits-100day">100 дней без (вредных привычек) — 100</button>
+                                </div>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="skills-sugar-1day">Сахар — 1 день</button>
+                                    <button class="sub-button" data-subpage="skills-sugar-5day">Сахар — 5 дней</button>
+                                    <button class="sub-button" data-subpage="skills-sugar-10day">Сахар — 10 дней</button>
+                                    <button class="sub-button" data-subpage="skills-sugar-15day">Сахар — 15 дней</button>
+                                    <button class="sub-button" data-subpage="skills-sugar-20day">Сахар — 20 дней</button>
+                                    <button class="sub-button" data-subpage="skills-sugar-30day">Сахар — 30 дней</button>
+                                </div>
+                                <button class="sub-button" data-subpage="skills-healthy-eating">Правильное питание</button>
+                                <button class="sub-button" data-subpage="skills-better-sleep">Лучше спать</button>
+                                <button class="sub-button" data-subpage="skills-fat-percent">Нормализовать % жира</button>
+                            </div>
+                            <button class="llm-button" id="llm-physical-mental-help">✨Спросить AI</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-physical-mental-help').onclick = () => {
+                                showLlmModal('AI-помощник: Физическое и ментальное', true, 'Как улучшить ментальное здоровье?', '', 'Как фитнес-тренер и специалист по ментальному здоровью');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        const fullQuery = `${llmModalSubmitButton.dataset.aiPersona}, ${query}`;
+                                        await callGeminiAPI(fullQuery, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'skills-educational-creative':
+                        pageTitle = 'НАВЫКИ: ОБРАЗОВАТЕЛЬНЫЕ И ТВОРЧЕСКИЕ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Образовательные и творческие навыки:</h3>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="skills-wimhof">Техника Вим Хофа</button>
+                                    <button class="sub-button" data-subpage="skills-notebook">Вести блокнот</button>
+                                    <button class="sub-button" data-subpage="skills-diction">Заниматься дикцией</button>
+                                    <button class="sub-button" data-subpage="skills-3d-blender">3D-блендер</button>
+                                    <button class="sub-button" data-subpage="skills-drawing">Научиться рисовать</button>
+                                    <button class="sub-button" data-subpage="skills-timemanagement">Настроить тайм-менеджмент</button>
+                                    <button class="sub-button" data-subpage="skills-rubikscube">Сборка кубика Рубика</button>
+                                    <button class="sub-button" data-subpage="skills-math-logic">Учить математику / логические стили</button>
+                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-educational-creative-help">✨Спросить AI</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-educational-creative-help').onclick = () => {
+                                showLlmModal('AI-помощник: Образование и творчество', true, 'Как начать учиться играть на гитаре?', '', 'Как образовательный и творческий наставник');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        const fullQuery = `${llmModalSubmitButton.dataset.aiPersona}, ${query}`;
+                                        await callGeminiAPI(fullQuery, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'why-live':
+                        pageTitle = 'ЗАЧЕМ ЖИТЬ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Поиск смысла жизни</h3>
+                                <p>Вопрос о смысле жизни волновал людей на протяжении веков. Для каждого ответ может быть уникальным, но часто он связан с поиском цели, самореализацией, отношениями с близкими, служением другим или стремлением к знаниям.</p>
+                                <p>Подумайте, что приносит вам радость, что вас вдохновляет, какие ценности для вас важны. Смысл жизни — это не что-то, что можно найти, а что-то, что создается вами каждый день.</p>
+                            </div>
+                            <div class="page-section">
+                                <h3>Видео и ресурсы:</h3>
+                                <div class="video-container">
+                                    <iframe src="https://www.youtube.com/embed/43" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <ul>
+                                    <li><a href="https://www.youtube.com/embed/44" target="_blank">Философия смысла жизни (YouTube)</a></li>
+                                    <li><a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BC%D1%8B%D1%81%D0%BB_%D0%B6%D0%B8%D0%B7%D0%BD%D0%B8" target="_blank">Смысл жизни на Википедии</a></li>
+                                </ul>
+                            </div>
+                            <button class="llm-button" id="llm-why-live-help">✨Спросить AI о смысле жизни</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-why-live-help').onclick = () => {
+                                showLlmModal('AI-помощник: Смысл жизни', true, 'Что такое смысл жизни для меня?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о смысле жизни: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'lofi':
+                        pageTitle = 'LO-FI';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Lo-Fi Музыка для Фокуса и Расслабления</h3>
+                                <p>Lo-fi музыка идеально подходит для учебы, работы или просто для расслабления. Ее мягкие ритмы и атмосферные звуки помогают сосредоточиться и снизить стресс.</p>
+                            </div>
+                            <div class="page-section">
+                                <h3>Прямая трансляция Lo-Fi:</h3>
+                                <div class="video-container">
+                                    <iframe src="https://www.youtube.com/live/jfKfPfyJRdk?si=YDbYA_bu7PqpKfha" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                                <p><i>(Прямая трансляция Lo-Fi музыки)</i></p>
+                            </div>
+                            <button class="llm-button" id="llm-lofi-info">✨Спросить AI о Lo-Fi</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-lofi-info').onclick = () => {
+                                showLlmModal('AI-помощник: Lo-Fi', true, 'Расскажи о пользе Lo-Fi музыки для продуктивности.');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о Lo-Fi музыке: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'pomodoro':
+                        pageTitle = 'МЕТОД ПОМИДОРА';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Техника Pomodoro</h3>
+                                <p>Техника Pomodoro — это метод управления временем, разработанный Франческо Чирилло в конце 1980-х. Он использует таймер для разбиения работы на 25-минутные интервалы, разделённые короткими перерывами.</p>
+                                <ol>
+                                    <li>Выберите задачу.</li>
+                                    <li>Установите таймер на 25 минут (один "помидор").</li>
+                                    <li>Работайте, не отвлекаясь, пока таймер не прозвонит.</li>
+                                    <li>Сделайте короткий перерыв (3-5 минут).</li>
+                                    <li>После каждых четырех "помидоров" делайте длинный перерыв (15-30 минут).</li>
+                                </ol>
+                            </div>
+                            <div class="page-section flex-center" style="flex-direction: column;">
+                                <h3>Таймер Pomodoro</h3>
+                                <div id="pomodoro-timer">25:00</div>
+                                <div class="timer-controls">
+                                    <button id="pomodoro-start">Старт</button>
+                                    <button id="pomodoro-pause">Пауза</button>
+                                    <button id="pomodoro-reset">Сброс</button>
+                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-pomodoro-tips">✨Спросить AI о продуктивности</button>
+                        `;
+                        // Attach event listeners for Pomodoro buttons after content is loaded
+                        setTimeout(() => {
+                            document.getElementById('pomodoro-start').onclick = startPomodoro;
+                            document.getElementById('pomodoro-pause').onclick = pausePomodoro;
+                            document.getElementById('pomodoro-reset').onclick = resetPomodoro;
+                            updatePomodoroDisplay();
+
+                            document.getElementById('llm-pomodoro-tips').onclick = () => {
+                                showLlmModal('AI-помощник: Продуктивность', true, 'Дай советы по повышению продуктивности с помощью Pomodoro.');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о продуктивности и технике Pomodoro: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'movies':
+                        pageTitle = 'ФИЛЬМЫ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Как смотреть фильмы бесплатно?</h3>
+                                <p>Если вы ищете фильм на КиноПоиске, попробуйте добавить английскую букву "n" перед "ran" в строке поиска после названия фильма (например, "кинопоиск.ру/фильм/название-фильма-nран"). Это может помочь найти альтернативные источники для просмотра.</p>
+                            </div>
+                            <div class="page-section">
+                                <h3>Фильмы, которые заставляют задуматься:</h3>
+                                <h4>Матрица (1999)</h4>
+                                <p><strong>Идея:</strong> Реальность может быть не тем, чем кажется. Фильм исследует вопросы свободы воли, выбора и природы реальности.</p>
+                                <p><strong>Чему учит:</strong> Ставить под сомнение привычное, искать истину, бороться за свои убеждения.</p>
+                                <div class="video-container">
+                                    <iframe src="https://www.youtube.com/embed/45" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <div class="page-section">
+                                <h4>Бойцовский клуб (1999)</h4>
+                                <p><strong>Идея:</strong> Критика потребительского общества и поиск идентичности в мире, где материальные блага доминируют.</p>
+                                <p><strong>Чему учит:</strong> Переосмысливать ценности, противостоять конформизму, находить внутреннюю силу.</p>
+                                <div class="video-container">
+                                    <iframe src="https://www.youtube.com/embed/46" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <div class="page-section">
+                                <h4>Интерстеллар (2014)</h4>
+                                <p><strong>Идея:</strong> Исследование человеческого духа, любви, науки и пределов выживания в условиях космических путешествий.</p>
+                                <p><strong>Чему учит:</strong> Ценить знания, стремиться к неизведанному, верить в себя и силу человеческих связей.</p>
+                                <div class="video-container">
+                                    <iframe src="https://www.youtube.com/embed/47" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-movie-suggest">✨Посоветовать фильм</button>
+                            <button class="llm-button" id="llm-movie-analysis">✨Анализ фильма</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-movie-suggest').onclick = () => {
+                                showLlmModal('AI-помощник: Посоветовать фильм', true, 'Посоветуй фильм на тему [тема] или похожий на [название фильма].');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Посоветуй фильм: "${query}". Включи вымышленную ссылку на КиноПоиск в формате Markdown: [КиноПоиск](https://www.kinopoisk.ru/film/123456/) и вымышленную ссылку на постер в формате Markdown: ![Постер фильма](https://placehold.co/150x200/000000/FFFFFF?text=Постер+фильма). Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                            document.getElementById('llm-movie-analysis').onclick = () => {
+                                showLlmModal('AI-помощник: Анализ фильма', true, 'Введите название фильма для анализа его идей и уроков...');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const movieTitle = llmModalTextarea.value.trim();
+                                    if (movieTitle || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Проанализируй фильм "${movieTitle}". Опиши его основные идеи и чему он может научить. Включи вымышленную ссылку на КиноПоиск в формате Markdown: [КиноПоиск](https://www.kinopoisk.ru/film/123456/) и вымышленную ссылку на постер в формате Markdown: ![Постер фильма](https://placehold.co/150x200/000000/FFFFFF?text=Постер+фильма). Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'lessons':
+                        pageTitle = 'УРОКИ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Выберите категорию уроков:</h3>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="lessons-languages">ЯЗЫКИ</button>
+                                    <button class="sub-button" data-subpage="lessons-sciences">НАУКИ</button>
+                                    <button class="sub-button" data-subpage="lessons-programming">ПРОГРАММИРОВАНИЕ</button>
+                                    <button class="sub-button" data-subpage="lessons-art-design">ИСКУССТВО И ДИЗАЙН</button>
+                                    <button class="sub-button" data-subpage="lessons-personal-dev">ЛИЧНОСТНОЕ РАЗВИТИЕ</button>
+                                </div>
+                                <button class="llm-button" id="llm-lesson-help">✨Спросить AI об уроках</button>
+                                <button class="llm-button" id="llm-create-lesson">✨Создать краткий урок</button>
+                            </div>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-lesson-help').onclick = () => {
+                                showLlmModal('AI-помощник: Уроки', true, 'Объясни концепцию [название концепции] или предложи ресурсы для изучения [предмет].');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос об уроках: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                            document.getElementById('llm-create-lesson').onclick = () => {
+                                showLlmModal('AI-помощник: Создать краткий урок', true, 'На какую тему вы хотите создать краткий урок?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const topic = llmModalTextarea.value.trim();
+                                    if (topic || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Создай краткий урок на тему "${topic}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'lessons-languages':
+                        pageTitle = 'УРОКИ: ЯЗЫКИ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Изучение языков:</h3>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="lesson-english">Английский язык</button>
+                                    <button class="sub-button" data-subpage="lesson-spanish">Испанский язык</button>
+                                    <button class="sub-button" data-subpage="lesson-german">Немецкий язык</button>
+                                    <button class="sub-button" data-subpage="lesson-french">Французский язык</button>
+                                    <button class="sub-button" data-subpage="lesson-chinese">Китайский язык</button>
+                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-language-help">✨Спросить AI о языках</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-language-help').onclick = () => {
+                                showLlmModal('AI-помощник: Языки', true, 'Как быстро выучить новый язык?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о языках: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'lessons-sciences':
+                        pageTitle = 'УРОКИ: НАУКИ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Изучение наук:</h3>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="lesson-physics">Физика</button>
+                                    <button class="sub-button" data-subpage="lesson-chemistry">Химия</button>
+                                    <button class="sub-button" data-subpage="lesson-biology">Биология</button>
+                                    <button class="sub-button" data-subpage="lesson-astronomy">Астрономия</button>
+                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-science-help">✨Спросить AI о науках</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-science-help').onclick = () => {
+                                showLlmModal('AI-помощник: Науки', true, 'Как лучше понять [название научной концепции]?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о науках: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'lessons-programming':
+                        pageTitle = 'УРОКИ: ПРОГРАММИРОВАНИЕ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Изучение программирования:</h3>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="lesson-python">Программирование на Python</button>
+                                    <button class="sub-button" data-subpage="lesson-javascript">Программирование на JavaScript</button>
+                                    <button class="sub-button" data-subpage="lesson-webdev">Веб-разработка</button>
+                                    <button class="sub-button" data-subpage="lesson-mobiledev">Мобильная разработка</button>
+                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-programming-help">✨Спросить AI о программировании</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-programming-help').onclick = () => {
+                                showLlmModal('AI-помощник: Программирование', true, 'Какой язык программирования лучше выбрать для начинающих?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о программировании: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'lessons-art-design':
+                        pageTitle = 'УРОКИ: ИСКУССТВО И ДИЗАЙН';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Изучение искусства и дизайна:</h3>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="lesson-graphicdesign">Графический дизайн</button>
+                                    <button class="sub-button" data-subpage="lesson-musictheory">Музыкальная теория</button>
+                                    <button class="sub-button" data-subpage="lesson-photography">Фотография</button>
+                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-art-design-help">✨Спросить AI об искусстве и дизайне</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-art-design-help').onclick = () => {
+                                showLlmModal('AI-помощник: Искусство и Дизайн', true, 'Как начать заниматься рисованием?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос об искусстве и дизайне: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'lessons-personal-dev':
+                        pageTitle = 'УРОКИ: ЛИЧНОСТНОЕ РАЗВИТИЕ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Изучение личного развития:</h3>
+                                <div class="button-grid">
+                                    <button class="sub-button" data-subpage="lesson-publicspeaking">Публичные выступления</button>
+                                    <button class="sub-button" data-subpage="lesson-criticalthinking">Критическое мышление</button>
+                                    <button class="sub-button" data-subpage="lesson-emotionalintelligence">Эмоциональный интеллект</button>
+                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-personal-dev-help">✨Спросить AI о личностном развитии</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-personal-dev-help').onclick = () => {
+                                showLlmModal('AI-помощник: Личностное развитие', true, 'Как улучшить навыки общения?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о личностном развитии: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'telegram':
+                        pageTitle = 'TELEGRAM ЧАТ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Присоединяйтесь к нашему Telegram-чату!</h3>
+                                <p>Общайтесь с единомышленниками, делитесь опытом, задавайте вопросы и получайте поддержку.</p>
+                                <a href="https://t.me/your_telegram_chat_link" target="_blank" class="main-button" style="display: inline-block; margin-top: 1rem;">Перейти в чат</a>
+                                <p><i>(Замените "your_telegram_chat_link" на реальную ссылку)</i></p>
+                            </div>
+                        `;
+                        break;
+                    case 'career-guidance':
+                        pageTitle = 'ПРОФОРИЕНТАЦИЯ';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>Ресурсы для профориентации:</h3>
+                                <p>Найдите свое призвание и постройте успешную карьеру с помощью этих полезных ресурсов.</p>
+                                <div class="button-grid">
+                                    <a href="https://proforientator.ru/" target="_blank" class="sub-button">Профориентатор</a>
+                                    <a href="https://www.hh.ru/career-guidance" target="_blank" class="sub-button">HeadHunter: Карьерное консультирование</a>
+                                    <a href="https://psytests.org/prof/" target="_blank" class="sub-button">Психологические тесты на профессию</a>
+                                </div>
+                            </div>
+                            <button class="llm-button" id="llm-career-guidance-help">✨Спросить AI о профориентации</button>
+                            <button class="llm-button" id="llm-profession-description">✨Описание профессии</button>
+                        `;
+                        setTimeout(() => {
+                            document.getElementById('llm-career-guidance-help').onclick = () => {
+                                showLlmModal('AI-помощник: Профориентация', true, 'Как выбрать профессию, если у меня нет четких интересов?');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const query = llmModalTextarea.value.trim();
+                                    if (query || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Ответь на вопрос о профориентации: "${query}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                            document.getElementById('llm-profession-description').onclick = () => {
+                                showLlmModal('AI-помощник: Описание профессии', true, 'Введите название профессии...');
+                                llmModalSubmitButton.onclick = async () => {
+                                    const profession = llmModalTextarea.value.trim();
+                                    if (profession || currentImageBase64) {
+                                        llmModalInputArea.classList.add('hidden');
+                                        llmModalResponseArea.classList.remove('hidden');
+                                        await callGeminiAPI(`Опиши профессию "${profession}". Включи ссылки на полезные ресурсы и места для практики.`, llmModalResponseText, llmModalLoading, null, currentImageBase64);
+                                    }
+                                };
+                            };
+                        }, 0);
+                        break;
+                    case 'github':
+                        pageTitle = 'GITHUB ПРОЕКТА';
+                        pageContent = `
+                            <div class="page-section">
+                                <h3>GitHub страница проекта</h3>
+                                <p>Посетите GitHub страницу автора, чтобы узнать больше о проекте, внести свой вклад или ознакомиться с другими работами.</p>
+                                <a href="https://github.com/your-github-username/your-project-repo" target="_blank" class="main-button" style="display: inline-block; margin-top: 1rem;">Перейти на GitHub</a>
+                                <p><i>(Замените "your-github-username/your-project-repo" на реальную ссылку)</i></p>
+                            </div>
+                        `;
+                        break;
+                    default:
+                        pageContent = `<div class="page-section"><h3>Страница не найдена</h3><p>Извините, запрошенная страница не существует.</p></div>`;
+                        pageTitle = 'Ошибка';
+                }
+            }
+
+
+            // Create page element
+            const pageDiv = document.createElement('div');
+            pageDiv.id = pageId;
+            pageDiv.classList.add('page');
+            pageDiv.innerHTML = `<h1 class="page-title">${pageTitle}</h1>` + pageContent;
+            appContainer.appendChild(pageDiv);
+
+            // Add event listeners for new buttons on the page
+            pageDiv.querySelectorAll('[data-page]').forEach(button => {
+                button.onclick = () => showPage(button.dataset.page);
+            });
+            pageDiv.querySelectorAll('[data-subpage]').forEach(button => {
+                button.onclick = () => showPage(button.dataset.subpage);
+            });
+        }
+
+        /**
+         * Handles back button click.
+         */
+        function goBack() {
+            if (historyStack.length > 1) {
+                historyStack.pop(); // Remove current page
+                const previousPageId = historyStack[historyStack.length - 1];
+                showPage(previousPageId, false); // Show previous page, don't push to history
+            }
+        }
+
+        // --- Music Player Functions ---
+
+        /**
+         * Toggles music play/pause.
+         */
+        function toggleMusicPlayPause() {
+            if (isMusicPlaying) {
+                backgroundMusic.pause();
+                isMusicPlaying = false;
+                musicPlayPauseButton.innerHTML = '<i class="fas fa-play"></i> Воспр.';
+            } else {
+                backgroundMusic.play().catch(e => console.error("Error playing music:", e));
+                isMusicPlaying = true;
+                musicPlayPauseButton.innerHTML = '<i class="fas fa-pause"></i> Пауза';
+            }
+        }
+
+        /**
+         * Plays the next track in the playlist.
+         */
+        function playNextTrack() {
+            currentTrackIndex = (currentTrackIndex + 1) % musicTracks.length;
+            backgroundMusic.src = musicTracks[currentTrackIndex];
+            backgroundMusic.load();
+            if (isMusicPlaying) {
+                backgroundMusic.play().catch(e => console.error("Error playing next track:", e));
+            }
+        }
+
+        /**
+         * Plays the previous track in the playlist.
+         */
+        function playPreviousTrack() {
+            currentTrackIndex = (currentTrackIndex - 1 + musicTracks.length) % musicTracks.length;
+            backgroundMusic.src = musicTracks[currentTrackIndex];
+            backgroundMusic.load();
+            if (isMusicPlaying) {
+                backgroundMusic.play().catch(e => console.error("Error playing previous track:", e));
+            }
+        }
+
+        // --- Pomodoro Timer Functions ---
+
+        /**
+         * Updates the Pomodoro timer display.
+         */
+        function updatePomodoroDisplay() {
+            const minutes = Math.floor(pomodoroTimeLeft / 60);
+            const seconds = pomodoroTimeLeft % 60;
+            document.getElementById('pomodoro-timer').textContent =
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        /**
+         * Starts the Pomodoro timer.
+         */
+        function startPomodoro() {
+            if (isPomodoroRunning) return;
+            isPomodoroRunning = true;
+            pomodoroTimerInterval = setInterval(() => {
+                if (pomodoroTimeLeft > 0) {
+                    pomodoroTimeLeft--;
+                    updatePomodoroDisplay();
+                } else {
+                    clearInterval(pomodoroTimerInterval);
+                    isPomodoroRunning = false;
+                    pomodoroSound.play().catch(e => console.error("Error playing sound:", e)); // Play sound on completion
+                    showMessageBox('Время Pomodoro истекло! Сделайте перерыв.');
+                    pomodoroTimeLeft = 25 * 60; // Reset for next session
+                    updatePomodoroDisplay();
+                }
+            }, 1000);
+        }
+
+        /**
+         * Pauses the Pomodoro timer.
+         */
+        function pausePomodoro() {
+            clearInterval(pomodoroTimerInterval);
+            isPomodoroRunning = false;
+        }
+
+        /**
+         * Resets the Pomodoro timer.
+         */
+        function resetPomodoro() {
+            clearInterval(pomodoroTimerInterval);
+            isPomodoroRunning = false;
+            pomodoroTimeLeft = 25 * 60;
+            updatePomodoroDisplay();
+        }
+
+        // --- Image Upload Functions ---
+
+        /**
+         * Displays the image preview.
+         * @param {string} imageData - Base64 string of the image.
+         * @param {HTMLElement} previewElement - The <img> element to update.
+         * @param {HTMLElement} containerElement - The container for the preview and clear button.
+         */
+        function displayImagePreview(imageData, previewElement, containerElement) {
+            previewElement.src = imageData;
+            containerElement.classList.remove('hidden');
+            currentImageBase64 = imageData;
+        }
+
+        /**
+         * Clears the image preview and associated data.
+         * @param {HTMLElement} previewElement - The <img> element to clear.
+         * @param {HTMLElement} containerElement - The container for the preview and clear button.
+         */
+        function clearImagePreview(previewElement, containerElement) {
+            previewElement.src = '';
+            containerElement.classList.add('hidden');
+            currentImageBase64 = null;
+            imageUploadCamera.value = ''; // Clear file input
+            imageUploadFile.value = ''; // Clear file input
+        }
+
+        /**
+         * Handles file input change event to read image as Base64.
+         * @param {Event} event - The change event.
+         * @param {HTMLElement} previewElement - The <img> element to update.
+         * @param {HTMLElement} containerElement - The container for the preview and clear button.
+         */
+        function handleImageFile(event, previewElement, containerElement) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    displayImagePreview(e.target.result, previewElement, containerElement);
+                };
+                reader.readAsDataURL(file);
+            }
+            imageUploadChoiceModal.classList.add('hidden'); // Hide choice modal
+        }
+
+
+        // --- Event Listeners ---
+
+        // Initial page load
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('home'); // Load the home page first
+        });
+
+        // Back button click
+        backButton.addEventListener('click', goBack);
+
+        // Music hamburger menu toggle
+        musicHamburger.addEventListener('click', (event) => {
+            musicMenu.classList.toggle('show');
+            event.stopPropagation(); // Prevent click from closing immediately
+        });
+
+        // Close music menu if clicked outside
+        document.addEventListener('click', (event) => {
+            if (!musicMenu.contains(event.target) && !musicHamburger.contains(event.target)) {
+                musicMenu.classList.remove('show');
+            }
+        });
+
+        // Music controls
+        musicPlayPauseButton.addEventListener('click', toggleMusicPlayPause);
+        musicNextButton.addEventListener('click', playNextTrack);
+        musicPrevButton.addEventListener('click', playPreviousTrack);
+        backgroundMusic.addEventListener('ended', playNextTrack); // Auto-play next track
+
+        // Footer buttons
+        supportChatButton.addEventListener('click', () => {
+            window.open('https://t.me/your_project_support_chat', '_blank'); // Placeholder Telegram link
+        });
+
+        supportAiButton.addEventListener('click', () => {
+            chatContainer.classList.toggle('hidden'); // Toggle visibility of AI chat
+            // If chat is shown, ensure input is visible and focus
+            if (!chatContainer.classList.contains('hidden')) {
+                chatContainer.classList.add('expanded');
+                chatToggleButton.innerHTML = 'Свернуть чат <i class="fas fa-chevron-down"></i>';
+                chatInput.focus(); // Focus the input field
+                chatMessages.innerHTML = ''; // Clear chat history for a fresh start
+                addChatMessage('Привет! Я AI-помощник. Чем могу помочь? Я могу отвечать на вопросы, давать советы и предоставлять ссылки на полезные ресурсы.', 'ai');
+            } else {
+                chatContainer.classList.remove('expanded');
+                chatToggleButton.innerHTML = 'Спроси, что интересно <i class="fas fa-chevron-up"></i>';
+            }
+            clearImagePreview(chatImagePreview, chatImagePreviewContainer); // Clear image when chat opens/closes
+        });
+
+        // AI Chat toggle button (for expanding/collapsing chat)
+        chatToggleButton.addEventListener('click', () => {
+            chatContainer.classList.toggle('expanded');
+            const icon = chatToggleButton.querySelector('i');
+            if (chatContainer.classList.contains('expanded')) {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+                chatToggleButton.innerHTML = 'Свернуть чат <i class="fas fa-chevron-down"></i>';
+            } else {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+                chatToggleButton.innerHTML = 'Спроси, что интересно <i class="fas fa-chevron-up"></i>';
+            }
+        });
+
+        // AI Chat send button
+        sendChatButton.addEventListener('click', sendAIChatMessage);
+        chatInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                sendAIChatMessage();
+            }
+        });
+
+        // LLM Modal close button
+        llmModalCloseButton.addEventListener('click', hideLlmModal);
+        llmModal.addEventListener('click', (event) => {
+            if (event.target === llmModal) { // Close if clicked outside content
+                hideLlmModal();
+            }
+        });
+        // Message Box close button
+        messageBoxCloseButton.addEventListener('click', hideMessageBox);
+
+        // Image upload attachment buttons
+        chatAttachmentButton.addEventListener('click', () => {
+            imageUploadChoiceModal.classList.remove('hidden');
+            currentImageTarget = 'chat';
+        });
+
+        llmModalAttachmentButton.addEventListener('click', () => {
+            imageUploadChoiceModal.classList.remove('hidden');
+            currentImageTarget = 'modal';
+        });
+
+        takePhotoButton.addEventListener('click', () => {
+            imageUploadCamera.click();
+        });
+
+        chooseFromDeviceButton.addEventListener('click', () => {
+            imageUploadFile.click();
+        });
+
+        imageUploadChoiceCancelButton.addEventListener('click', () => {
+            imageUploadChoiceModal.classList.add('hidden');
+        });
+
+        imageUploadCamera.addEventListener('change', (event) => {
+            if (currentImageTarget === 'chat') {
+                handleImageFile(event, chatImagePreview, chatImagePreviewContainer);
+            } else if (currentImageTarget === 'modal') {
+                handleImageFile(event, llmModalImagePreview, llmModalImagePreviewContainer);
+            }
+        });
+
+        imageUploadFile.addEventListener('change', (event) => {
+            if (currentImageTarget === 'chat') {
+                handleImageFile(event, chatImagePreview, chatImagePreviewContainer);
+            } else if (currentImageTarget === 'modal') {
+                handleImageFile(event, llmModalImagePreview, llmModalImagePreviewContainer);
+            }
+        });
+
+        chatClearImageButton.addEventListener('click', () => {
+            clearImagePreview(chatImagePreview, chatImagePreviewContainer);
+        });
+
+        llmModalClearImageButton.addEventListener('click', () => {
+            clearImagePreview(llmModalImagePreview, llmModalImagePreviewContainer);
+        });
+
+
+        // Include Marked.js for Markdown parsing
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+        script.onload = () => {
+            console.log('Marked.js loaded');
+        };
+        document.head.appendChild(script);
+
+    </script>
+</body>
+</html>
